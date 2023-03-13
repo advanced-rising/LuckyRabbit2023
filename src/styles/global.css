@@ -93,14 +93,10 @@ html,
 body {
   background-color: #ffffff;
   color: #000000;
+  width: 100vw;
+  height: 100vh;
 }
-html {
-  overflow: scroll;
-  overflow-x: hidden;
-  -ms-overflow-style: none; /* 인터넷 익스플로러 */
-  scrollbar-color: rgb(32, 32, 32, 0.6) rgb(32, 32, 32, 0.4);
-  scrollbar-width: thin !important; /* 파이어폭스 */
-}
+
 ::-webkit-scrollbar {
   /* width: 0px;  */
   /* Remove scrollbar space */
