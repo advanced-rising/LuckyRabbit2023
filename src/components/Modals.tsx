@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { keyframes } from '@emotion/react';
-import useModals from '@hooks/useModals';
-import { useAppSelector } from '@redux/storeHooks';
+import { useAppSelector } from 'redux/storeHooks';
+import useModals from 'hooks/shared/useModals';
 
 const fadeOut = keyframes`
   0% {

@@ -14,21 +14,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": "./src",
-    "paths": {
-      "@libs/*": ["libs/*"],
-      "@contexts/*": ["contexts/*"],
-      "@redux/*": ["redux/*"],
-      "@components/*": ["components/*"],
-      "@_types/*": ["types/*"],
-      "@utils/*": ["utils/*"],
-      "@hooks/*": ["hooks/*"],
-      "@theme/*": ["theme/*"],
-      "@shared/*": ["components/shared/*"],
-      "@src/*": ["src/*"],
-      "@apis/*": ["apis/*"],
-      "@modals/*": ["modals/*"]
-    }
+    "baseUrl": "./src"
   },
   "include": ["src", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

@@ -1,7 +1,7 @@
-import userApi from '@apis/userApi';
+import userApi from 'apis/userApi';
 
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import MeDto from '@_types/MeDto';
+import MeDto from 'types/MeDto';
 import { AxiosError } from 'axios';
 
 export default function useUserQuery(

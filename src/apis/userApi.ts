@@ -1,5 +1,5 @@
-import axiosInstance from '@utils/axios';
-import MeDto from '@_types/MeDto';
+import axiosInstance from 'utils/axios';
+import MeDto from 'types/MeDto';
 
 const userApi = {
   me: async (): Promise<MeDto> => {

@@ -1,5 +1,5 @@
-import axiosInstance from '@utils/axios';
-import TeamDto from '@_types/TeamDto';
+import axiosInstance from 'utils/axios';
+import TeamDto from 'types/TeamDto';
 
 const QueryKeys = {
   GET_TEAM: 'get_team',

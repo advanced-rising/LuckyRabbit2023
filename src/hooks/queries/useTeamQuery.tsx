@@ -1,7 +1,7 @@
-import teamApi from '@apis/teamApi';
+import teamApi from 'apis/teamApi';
 
 import { useQuery, UseQueryOptions } from '@tanstack/react-query';
-import TeamDto from '@_types/TeamDto';
+import TeamDto from 'types/TeamDto';
 import { AxiosError } from 'axios';
 import useUserQuery from './useUserQuery';
 
