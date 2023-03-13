@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { store } from '@redux/store';
+import React, { useState } from 'react';
+import { Provider } from 'react-redux';
+import AppRoutes from 'routes/AppRoutes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import Modals from '@components/Modals';
 
-function App() {
+const App = () => {
+  const [client] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 1000 * 1,
+          },
+        },
+      }),
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <QueryClientProvider client={client}>
+        <Provider store={store}>
+          <Modals />
+          <AppRoutes />
+        </Provider>
+        <ReactQueryDevtools />
+      </QueryClientProvider>
     </div>
   );
-}
+};
 
 export default App;
