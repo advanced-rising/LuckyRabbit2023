@@ -1,0 +1,26 @@
+{
+  "plugins": ["@typescript-eslint"],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended", "next", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "prettier/prettier": ["warn", { "endOfLine": "auto" }],
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "Delete `·`": "off",
+    "object-curly-newline": ["off"],
+    "function-paren-newline": ["off"],
+    "react/display-name": ["off"],
+    "no-constant-condition": "warn",
+    "react-hooks/rules-of-hooks": "warn",
+    "no-empty-pattern": "warn",
+    "no-undef": "error",
+    "no-redeclare": "warn",
+    "react/jsx-key": "error",
+    "no-unused-vars": "off",
+    "@typescript-eslint/prefer-as-const": "warn",
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-empty-interface": "warn",
+    "@typescript-eslint/no-explicit-any": "off",
+    "import/no-anonymous-default-export": "off",
+    "no-var": "warn",
+    "prefer-const": "off"
+  }
+}
