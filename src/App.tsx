@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Modals from './components/Modals';
 import { store } from './redux/store';
 import './styles/global.css';
+import DashboardLayout from 'components/layout/DashboardLayout';
 
 const App = () => {
   const [client] = useState(
@@ -21,13 +22,15 @@ const App = () => {
 
   return (
     <div>
-      <QueryClientProvider client={client}>
-        <Provider store={store}>
-          <Modals />
-          <AppRoutes />
-          <ReactQueryDevtools />
-        </Provider>
-      </QueryClientProvider>
+      <DashboardLayout>
+        <QueryClientProvider client={client}>
+          <Provider store={store}>
+            <Modals />
+            <AppRoutes />
+            <ReactQueryDevtools />
+          </Provider>
+        </QueryClientProvider>
+      </DashboardLayout>
     </div>
   );
 };
