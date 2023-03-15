@@ -84,6 +84,9 @@ const HeaderComponent = styled.h2<{ sx: CSSObject | undefined }>`
 const TypoComponent = styled.p<{ sx: CSSObject | undefined }>`
   ${({ sx }) => ({ ...sx })}
 `;
+const ButtonComponent = styled.div<{ wrapperStyle: CSSProperties | undefined }>`
+  ${({ wrapperStyle }) => ({ ...wrapperStyle })}
+`;
 
 const IconButtonComponent = styled.button<{ sx: CSSObject | undefined }>`
   border: 0;
