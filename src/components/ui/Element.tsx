@@ -1,14 +1,14 @@
-import { CSSProperties } from '@emotion/serialize';
+import { CSSObject } from '@emotion/serialize';
 import styled from '@emotion/styled';
 import React from 'react';
 
-interface Props {
+interface Props extends React.HTMLAttributes<Element> {
   component?: React.ElementType;
-  children: React.ReactNode | string;
-  wrapperStyle?: CSSProperties | React.CSSProperties;
+  children?: React.ReactNode | string;
+  wrapperStyle?: CSSObject;
 }
 
-export const Box = ({ component, children, wrapperStyle, ...rest }: Props & React.Attributes) => {
+export const Box = ({ component, children, wrapperStyle, ...rest }: Props) => {
   return (
     <BoxComponent as={component} wrapperStyle={wrapperStyle} {...rest}>
       {children}
@@ -16,7 +16,7 @@ export const Box = ({ component, children, wrapperStyle, ...rest }: Props & Reac
   );
 };
 
-export const Header = ({ component, children, wrapperStyle, ...rest }: Props & React.Attributes) => {
+export const Header = ({ component, children, wrapperStyle, ...rest }: Props) => {
   return (
     <HeaderComponent as={component} wrapperStyle={wrapperStyle} {...rest}>
       {children}
@@ -24,7 +24,7 @@ export const Header = ({ component, children, wrapperStyle, ...rest }: Props & R
   );
 };
 
-export const Typo = ({ component, children, wrapperStyle, ...rest }: Props & React.Attributes) => {
+export const Typo = ({ component, children, wrapperStyle, ...rest }: Props) => {
   return (
     <TypoComponent as={component} wrapperStyle={wrapperStyle} {...rest}>
       {children}
@@ -32,12 +32,27 @@ export const Typo = ({ component, children, wrapperStyle, ...rest }: Props & Rea
   );
 };
 
-const TypoComponent = styled.div<{ wrapperStyle: CSSProperties | undefined }>`
+export const IconButton = ({ component, children, wrapperStyle, ...rest }: Props) => {
+  return (
+    <IconButtonComponent as={component} wrapperStyle={wrapperStyle} {...rest}>
+      {children}
+    </IconButtonComponent>
+  );
+};
+
+const TypoComponent = styled.p<{ wrapperStyle: CSSObject | undefined }>`
   ${({ wrapperStyle }) => ({ ...wrapperStyle })}
 `;
-const HeaderComponent = styled.h2<{ wrapperStyle: CSSProperties | undefined }>`
+const IconButtonComponent = styled.button<{ wrapperStyle: CSSObject | undefined }>`
+  border: 0;
+  background-color: transparent;
+  color: #000;
+  cursor: pointer;
   ${({ wrapperStyle }) => ({ ...wrapperStyle })}
 `;
-const BoxComponent = styled.div<{ wrapperStyle: CSSProperties | undefined }>`
+const HeaderComponent = styled.h2<{ wrapperStyle: CSSObject | undefined }>`
+  ${({ wrapperStyle }) => ({ ...wrapperStyle })}
+`;
+const BoxComponent = styled.div<{ wrapperStyle: CSSObject | undefined }>`
   ${({ wrapperStyle }) => ({ ...wrapperStyle })}
 `;
