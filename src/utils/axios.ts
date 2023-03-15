@@ -1,8 +1,8 @@
 import axios from 'axios';
+import { BASE_URL } from './Constants';
 
 const axiosInstance = axios.create({
-  // baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  // baseURL: 'http://localhost:3001',
+  baseURL: BASE_URL,
   withCredentials: true,
   headers: {
     'Access-Control-Allow-Origin': '*',
@@ -11,9 +11,9 @@ const axiosInstance = axios.create({
   },
 });
 
-// if (process.env.NEXT_PUBLIC_BASE_URL) {
-//   axiosInstance.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
-// }
+if (process.env.NEXT_PUBLIC_BASE_URL) {
+  axiosInstance.defaults.baseURL = BASE_URL;
+}
 
 axiosInstance.interceptors.response.use(
   (response) => response,
