@@ -2,6 +2,18 @@ import styled from '@emotion/styled';
 import React from 'react';
 import { Colors } from 'utils/Constants';
 
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <Wrapper>
+      <Header />
+
+      <MainLayout>{children}</MainLayout>
+    </Wrapper>
+  );
+};
+
+export default DashboardLayout;
+
 const Wrapper = styled.div`
   width: 390px;
   height: 100vh;
@@ -26,15 +38,3 @@ const MainLayout = styled.main`
   width: 100%;
   height: calc(100% - 54px);
 `;
-
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <Wrapper>
-      <Header />
-
-      <MainLayout>{children}</MainLayout>
-    </Wrapper>
-  );
-};
-
-export default DashboardLayout;
