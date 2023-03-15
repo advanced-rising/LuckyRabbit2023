@@ -7,3 +7,7 @@ export const Colors = {
   warningColor: '#E26F6B',
   bgColor: '#FFFFFF',
 } as const;
+
+export const BASE_URL = (() => {
+  return 'http://ec2-15-165-104-125.ap-northeast-2.compute.amazonaws.com:8080';
+})();
