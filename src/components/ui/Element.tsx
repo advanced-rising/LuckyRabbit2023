@@ -32,12 +32,23 @@ export const Typo = ({ component, children, wrapperStyle, ...rest }: Props & Rea
   );
 };
 
-const TypoComponent = styled.div<{ wrapperStyle: CSSProperties | undefined }>`
+export const Button = ({ component, children, wrapperStyle, ...rest }: Props & React.Attributes) => {
+  return (
+    <ButtonComponent as={component} wrapperStyle={wrapperStyle} {...rest}>
+      {children}
+    </ButtonComponent>
+  );
+};
+
+const BoxComponent = styled.div<{ wrapperStyle: CSSProperties | undefined }>`
   ${({ wrapperStyle }) => ({ ...wrapperStyle })}
 `;
 const HeaderComponent = styled.h2<{ wrapperStyle: CSSProperties | undefined }>`
   ${({ wrapperStyle }) => ({ ...wrapperStyle })}
 `;
-const BoxComponent = styled.div<{ wrapperStyle: CSSProperties | undefined }>`
+const TypoComponent = styled.div<{ wrapperStyle: CSSProperties | undefined }>`
+  ${({ wrapperStyle }) => ({ ...wrapperStyle })}
+`;
+const ButtonComponent = styled.div<{ wrapperStyle: CSSProperties | undefined }>`
   ${({ wrapperStyle }) => ({ ...wrapperStyle })}
 `;
