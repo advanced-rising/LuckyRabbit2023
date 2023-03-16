@@ -10,6 +10,11 @@ const userApi = {
     const { data } = await axiosInstance.put(`/v1/admin/partners/${userId}`, info);
     return data;
   },
+
+  logout() {
+    localStorage.removeItem('accessToken');
+    delete axiosInstance.defaults.headers.common.Authorization;
+  },
 };
 
 export default userApi;

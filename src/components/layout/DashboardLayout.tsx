@@ -6,7 +6,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Wrapper>
       <Header />
-
       <MainLayout>{children}</MainLayout>
     </Wrapper>
   );
