@@ -32,7 +32,7 @@ export const Typo = ({ component, children, sx, ...rest }: Props) => {
   );
 };
 
-export const Button = ({ component, children, sx, ...rest }: Props & React.Attributes) => {
+export const Button = ({ component, children, sx, ...rest }: Props) => {
   return (
     <ButtonComponent as={component} sx={sx} {...rest}>
       {children}
@@ -58,9 +58,6 @@ const HeaderComponent = styled.h2<{ sx: CSSObject | undefined }>`
 
 const TypoComponent = styled.p<{ sx: CSSObject | undefined }>`
   ${({ sx }) => ({ ...sx })}
-`;
-const ButtonComponent = styled.div<{ wrapperStyle: CSSProperties | undefined }>`
-  ${({ wrapperStyle }) => ({ ...wrapperStyle })}
 `;
 
 const IconButtonComponent = styled.button<{ sx: CSSObject | undefined }>`
