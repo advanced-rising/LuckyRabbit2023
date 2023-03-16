@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <Box
       component={'section'}
-      wrapperStyle={{
+      sx={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -17,14 +17,14 @@ const Home = () => {
       }}>
       <Box
         component={'article'}
-        wrapperStyle={{
+        sx={{
           width: '100%',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
         <Box
-          wrapperStyle={{
+          sx={{
             display: 'flex',
             justifyContent: 'start',
             alignItems: 'start',
@@ -32,13 +32,13 @@ const Home = () => {
             gap: '4px',
           }}>
           <Typo
-            wrapperStyle={{
+            sx={{
               fontSize: 22,
               fontWeight: 700,
             }}>
             <Typo
               component={'span'}
-              wrapperStyle={{
+              sx={{
                 position: 'relative',
                 '&::after': {
                   display: 'block',
@@ -56,21 +56,21 @@ const Home = () => {
             님!
           </Typo>
           <Typo
-            wrapperStyle={{
+            sx={{
               fontSize: 22,
               fontWeight: 700,
             }}>
             받은 세뱃돈은
           </Typo>
           <Typo
-            wrapperStyle={{
+            sx={{
               fontSize: 22,
               fontWeight: 700,
             }}>
             총&nbsp;
             <Typo
               component={'span'}
-              wrapperStyle={{
+              sx={{
                 color: Colors.mainColor,
               }}>
               25,000
@@ -79,14 +79,14 @@ const Home = () => {
           </Typo>
         </Box>
         <Box
-          wrapperStyle={{
+          sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             gap: '8px',
           }}>
           <IconButton
-            wrapperStyle={{
+            sx={{
               width: 60,
               height: 60,
               padding: 0,
@@ -96,7 +96,7 @@ const Home = () => {
             <Typo className={'sr-only'}>링크복사</Typo>
           </IconButton>
           <IconButton
-            wrapperStyle={{
+            sx={{
               width: 60,
               height: 60,
               padding: 0,
@@ -110,11 +110,11 @@ const Home = () => {
 
       <Box
         component={'article'}
-        wrapperStyle={{
+        sx={{
           paddingTop: '33px',
         }}>
         <Box
-          wrapperStyle={{
+          sx={{
             width: 330,
             height: 330,
             backgroundImage: `url('/assets/home-bg.png')`,

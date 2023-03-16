@@ -5,67 +5,69 @@ import React from 'react';
 interface Props extends React.HTMLAttributes<Element> {
   component?: React.ElementType;
   children?: React.ReactNode | string;
-  wrapperStyle?: CSSObject;
+  sx?: CSSObject;
 }
 
-export const Box = ({ component, children, wrapperStyle, ...rest }: Props) => {
+export const Box = ({ component, children, sx, ...rest }: Props) => {
   return (
-    <BoxComponent as={component} wrapperStyle={wrapperStyle} {...rest}>
+    <BoxComponent as={component} sx={sx} {...rest}>
       {children}
     </BoxComponent>
   );
 };
 
-export const Header = ({ component, children, wrapperStyle, ...rest }: Props) => {
+export const Header = ({ component, children, sx, ...rest }: Props) => {
   return (
-    <HeaderComponent as={component} wrapperStyle={wrapperStyle} {...rest}>
+    <HeaderComponent as={component} sx={sx} {...rest}>
       {children}
     </HeaderComponent>
   );
 };
 
-export const Typo = ({ component, children, wrapperStyle, ...rest }: Props) => {
+export const Typo = ({ component, children, sx, ...rest }: Props) => {
   return (
-    <TypoComponent as={component} wrapperStyle={wrapperStyle} {...rest}>
+    <TypoComponent as={component} sx={sx} {...rest}>
       {children}
     </TypoComponent>
   );
 };
 
-export const Button = ({ component, children, wrapperStyle, ...rest }: Props & React.Attributes) => {
+export const Button = ({ component, children, sx, ...rest }: Props & React.Attributes) => {
   return (
-    <ButtonComponent as={component} wrapperStyle={wrapperStyle} {...rest}>
+    <ButtonComponent as={component} sx={sx} {...rest}>
       {children}
     </ButtonComponent>
   );
 };
 
-export const IconButton = ({ component, children, wrapperStyle, ...rest }: Props) => {
+export const IconButton = ({ component, children, sx, ...rest }: Props) => {
   return (
-    <IconButtonComponent as={component} wrapperStyle={wrapperStyle} {...rest}>
+    <IconButtonComponent as={component} sx={sx} {...rest}>
       {children}
     </IconButtonComponent>
   );
 };
 
-const BoxComponent = styled.div<{ wrapperStyle: CSSObject | undefined }>`
-  ${({ wrapperStyle }) => ({ ...wrapperStyle })}
+const BoxComponent = styled.div<{ sx: CSSObject | undefined }>`
+  ${({ sx }) => ({ ...sx })}
 `;
 
-const HeaderComponent = styled.h2<{ wrapperStyle: CSSObject | undefined }>`
-  ${({ wrapperStyle }) => ({ ...wrapperStyle })}
+const HeaderComponent = styled.h2<{ sx: CSSObject | undefined }>`
+  ${({ sx }) => ({ ...sx })}
 `;
 
-const TypoComponent = styled.p<{ wrapperStyle: CSSObject | undefined }>`
-  ${({ wrapperStyle }) => ({ ...wrapperStyle })}
+const TypoComponent = styled.p<{ sx: CSSObject | undefined }>`
+  ${({ sx }) => ({ ...sx })}
 `;
 
-const IconButtonComponent = styled.button<{ wrapperStyle: CSSObject | undefined }>`
+const IconButtonComponent = styled.button<{ sx: CSSObject | undefined }>`
   border: 0;
   background-color: transparent;
   color: #000;
   cursor: pointer;
-  ${({ wrapperStyle }) => ({ ...wrapperStyle })}
+  ${({ sx }) => ({ ...sx })}
 `;
 
-const ButtonComponent = styled.div<{ wrapperStyle: CSSObject | undefined }>`
+const ButtonComponent = styled.div<{ sx: CSSObject | undefined }>`
+  ${({ sx }) => ({ ...sx })}
+`;

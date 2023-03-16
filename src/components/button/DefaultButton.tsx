@@ -7,7 +7,7 @@ interface Props {
 
 const DefaultButton = ({ children }: Props) => {
   return (
-    <Button component={'button'} wrapperStyle={{ width: '330px', height: '50px' }}>
+    <Button component={'button'} sx={{ width: '330px', height: '50px' }}>
       {children}
     </Button>
   );

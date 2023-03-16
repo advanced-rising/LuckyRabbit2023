@@ -6,7 +6,7 @@ const SignUp = () => {
     <>
       <Box
         component={'div'}
-        wrapperStyle={{
+        sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -14,7 +14,7 @@ const SignUp = () => {
         }}>
         <Header
           component={'h2'}
-          wrapperStyle={{
+          sx={{
             fontSize: 50,
             fontFamily: 'RixInooAriDuriR',
             color: Colors.mainTitleColor,
@@ -26,7 +26,7 @@ const SignUp = () => {
       {/* <DefaultButton props={'aaA'}></DefaultButton> */}
       <Button
         component={'button'}
-        wrapperStyle={{
+        sx={{
           width: '330px',
           height: '50px',
           borderRadius: '12px',
