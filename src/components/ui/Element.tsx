@@ -1,6 +1,6 @@
 import { CSSObject } from '@emotion/serialize';
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { InputHTMLAttributes, LabelHTMLAttributes } from 'react';
 
 interface Props extends React.HTMLAttributes<Element> {
   component?: React.ElementType;
@@ -47,6 +47,22 @@ export const IconButton = ({ component, children, sx, ...rest }: Props) => {
     </IconButtonComponent>
   );
 };
+// htmlinputelement typescript react
+export const Input = ({ component, children, sx, ...rest }: Props & InputHTMLAttributes<HTMLInputElement>) => {
+  return (
+    <InputComponent as={component} sx={sx} {...rest}>
+      {children}
+    </InputComponent>
+  );
+};
+
+export const Label = ({ component, children, sx, ...rest }: Props & LabelHTMLAttributes<HTMLLabelElement>) => {
+  return (
+    <LabelComponent as={component} sx={sx} {...rest}>
+      {children}
+    </LabelComponent>
+  );
+};
 
 const BoxComponent = styled.div<{ sx: CSSObject | undefined }>`
   ${({ sx }) => ({ ...sx })}
@@ -69,5 +85,13 @@ const IconButtonComponent = styled.button<{ sx: CSSObject | undefined }>`
 `;
 
 const ButtonComponent = styled.div<{ sx: CSSObject | undefined }>`
+  ${({ sx }) => ({ ...sx })}
+`;
+
+const InputComponent = styled.input<{ sx: CSSObject | undefined }>`
+  ${({ sx }) => ({ ...sx })}
+`;
+
+const LabelComponent = styled.label<{ sx: CSSObject | undefined }>`
   ${({ sx }) => ({ ...sx })}
 `;

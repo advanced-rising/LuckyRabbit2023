@@ -1,3 +1,4 @@
+import DefaultFormField from 'components/input/DefaultFormField';
 import { Box, Button, Header } from 'components/ui/Element';
 import { Colors } from 'utils/Constants';
 
@@ -23,7 +24,11 @@ const SignUp = () => {
         </Header>
       </Box>
 
-      {/* <DefaultButton props={'aaA'}></DefaultButton> */}
+      <DefaultFormField label={'이름'} placeholder={'홍길동'} />
+      <DefaultFormField label={'이메일'} placeholder={'example@example.com'} />
+      <DefaultFormField label={'비밀번호'} placeholder={'********'} />
+      <DefaultFormField label={'비밀번호 확인'} placeholder={'********'} />
+
       <Button
         component={'button'}
         sx={{
