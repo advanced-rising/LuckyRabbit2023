@@ -1,4 +1,5 @@
 import DefaultFormField from 'components/input/DefaultFormField';
+import DashboardLayout from 'components/layout/DashboardLayout';
 import { Box, Button, Header } from 'components/ui/Element';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import FormInput from 'types/FormDto';
@@ -19,7 +20,7 @@ const SignUp = () => {
   };
 
   return (
-    <>
+    <DashboardLayout>
       <Box
         component={'div'}
         sx={{
@@ -85,24 +86,22 @@ const SignUp = () => {
             // validate: (value) => value === passwordInput.current,
           })}
         />
-
-        <Button
-          component={'button'}
-          sx={{
-            width: '330px',
-            height: '50px',
-            borderRadius: '12px',
-            fontSize: '16px',
-            color: Colors.bgColor,
-            backgroundColor: Colors.mainColor,
-            border: '0px',
-            margin: '0px 30px',
-            cursor: 'pointer',
-          }}>
-          회원가입
-        </Button>
-      </form>
-    </>
+      <Button
+        component={'button'}
+        sx={{
+          width: '330px',
+          height: '50px',
+          borderRadius: '12px',
+          fontSize: '16px',
+          color: Colors.bgColor,
+          backgroundColor: Colors.mainColor,
+          border: '0px',
+          margin: '0px 30px',
+          cursor: 'pointer',
+        }}>
+        회원가입
+      </Button>
+    </DashboardLayout>
   );
 };
 export default SignUp;

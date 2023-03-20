@@ -92,8 +92,9 @@ const IconButtonComponent = styled.button<{ sx: CSSObject | undefined }>`
   ${({ sx }) => ({ ...sx })}
 `;
 
-const ButtonComponent = styled.div<{ sx: CSSObject | undefined }>`
-  ${({ sx }) => ({ ...sx })}
+const ButtonComponent = styled.button<{ sx: CSSObject | undefined }>`
+  cursor: pointer;
+  ${({ sx }) => ({ ...sx })};
 `;
 
 const InputComponent = styled.input<{ sx: CSSObject | undefined }>`
