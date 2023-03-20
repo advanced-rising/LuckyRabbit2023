@@ -1,9 +1,10 @@
+import DashboardLayout from 'components/layout/DashboardLayout';
 import { Box, Button, Header } from 'components/ui/Element';
 import { Colors } from 'utils/Constants';
 
 const SignUp = () => {
   return (
-    <>
+    <DashboardLayout>
       <Box
         component={'div'}
         sx={{
@@ -39,7 +40,7 @@ const SignUp = () => {
         }}>
         회원가입
       </Button>
-    </>
+    </DashboardLayout>
   );
 };
 export default SignUp;
