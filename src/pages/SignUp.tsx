@@ -1,8 +1,23 @@
 import DefaultFormField from 'components/input/DefaultFormField';
 import { Box, Button, Header } from 'components/ui/Element';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import FormInput from 'types/FormDto';
 import { Colors } from 'utils/Constants';
+import { emailRegEx, passwordRegEx } from 'utils/regex';
 
 const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isDirty },
+  } = useForm<FormInput>({ mode: 'onChange' });
+
+  const onSubmit: SubmitHandler<FormInput> = (formData) => {
+    console.log(formData);
+    // mutate(formData);
+  };
+
   return (
     <>
       <Box
@@ -24,26 +39,69 @@ const SignUp = () => {
         </Header>
       </Box>
 
-      <DefaultFormField label={'이름'} placeholder={'홍길동'} />
-      <DefaultFormField label={'이메일'} placeholder={'example@example.com'} />
-      <DefaultFormField label={'비밀번호'} placeholder={'********'} />
-      <DefaultFormField label={'비밀번호 확인'} placeholder={'********'} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <DefaultFormField
+          label={'이름'}
+          placeholder={'홍길동'}
+          register={register('userName', {
+            required: '이름을 입력해 주세요.',
+            minLength: {
+              value: 2,
+              message: '이름은 2~3자로 입력해 주세요.',
+            },
+            maxLength: {
+              value: 3,
+              message: '이름은 2~3자로 입력해 주세요.',
+            },
+          })}
+        />
+        <DefaultFormField
+          label={'이메일'}
+          placeholder={'example@example.com'}
+          register={register('userEmail', {
+            required: '이메일을 입력해 주세요.',
+            pattern: {
+              value: emailRegEx,
+              message: '이메일 형식이 올바르지 않습니다.',
+            },
+          })}
+        />
+        <DefaultFormField
+          label={'비밀번호'}
+          placeholder={'********'}
+          register={register('userPassword', {
+            required: '비밀번호를 입력해 주세요.',
+            pattern: {
+              value: passwordRegEx,
+              message: '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.',
+            },
+          })}
+        />
+        <DefaultFormField
+          label={'비밀번호 확인'}
+          placeholder={'********'}
+          register={register('userPasswordConfirm', {
+            required: true,
+            // validate: (value) => value === passwordInput.current,
+          })}
+        />
 
-      <Button
-        component={'button'}
-        sx={{
-          width: '330px',
-          height: '50px',
-          borderRadius: '12px',
-          fontSize: '16px',
-          color: Colors.bgColor,
-          backgroundColor: Colors.mainColor,
-          border: '0px',
-          margin: '0px 30px',
-          cursor: 'pointer',
-        }}>
-        회원가입
-      </Button>
+        <Button
+          component={'button'}
+          sx={{
+            width: '330px',
+            height: '50px',
+            borderRadius: '12px',
+            fontSize: '16px',
+            color: Colors.bgColor,
+            backgroundColor: Colors.mainColor,
+            border: '0px',
+            margin: '0px 30px',
+            cursor: 'pointer',
+          }}>
+          회원가입
+        </Button>
+      </form>
     </>
   );
 };
