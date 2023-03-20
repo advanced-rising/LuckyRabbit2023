@@ -1,11 +1,47 @@
 import styled from '@emotion/styled';
+import BackArrow from 'components/Icons/BackArrow';
+import { Box, IconButton } from 'components/ui/Element';
 import React from 'react';
 import { Colors } from 'utils/Constants';
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = ({
+  back,
+  title,
+  children,
+}: {
+  back?: boolean;
+  title?: React.ReactNode;
+  children: React.ReactNode;
+}) => {
   return (
     <Wrapper>
-      <Header />
+      <Header>
+        <HeaderRibbon />
+        {title && (
+          <Box
+            sx={{
+              paddingTop: '50px',
+
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Box>{title}</Box>
+          </Box>
+        )}
+        {back && (
+          <IconButton
+            sx={{
+              position: 'absolute',
+              top: '94px',
+              left: '30px',
+              width: 48,
+              height: 48,
+            }}>
+            <BackArrow />
+          </IconButton>
+        )}
+      </Header>
       <MainLayout>{children}</MainLayout>
     </Wrapper>
   );
@@ -24,7 +60,7 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
-const Header = styled.header`
+const HeaderRibbon = styled.div`
   width: 100%;
   height: 54px;
   background-image: url('/assets/common-top_bg.png');
@@ -33,7 +69,17 @@ const Header = styled.header`
   background-repeat: no-repeat;
 `;
 
+const Header = styled.header`
+  width: 100%;
+  position: relative;
+  top: 0;
+`;
+
 const MainLayout = styled.main`
   width: 100%;
   height: calc(100% - 54px);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
 `;
