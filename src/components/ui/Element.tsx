@@ -1,11 +1,13 @@
 import { CSSObject } from '@emotion/serialize';
 import styled from '@emotion/styled';
 import React, { InputHTMLAttributes, LabelHTMLAttributes } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 interface Props extends React.HTMLAttributes<Element> {
   component?: React.ElementType;
   children?: React.ReactNode | string;
   sx?: CSSObject;
+  register?: UseFormRegisterReturn;
 }
 
 export const Box = ({ component, children, sx, ...rest }: Props) => {
@@ -48,9 +50,15 @@ export const IconButton = ({ component, children, sx, ...rest }: Props) => {
   );
 };
 // htmlinputelement typescript react
-export const Input = ({ component, children, sx, ...rest }: Props & InputHTMLAttributes<HTMLInputElement>) => {
+export const Input = ({
+  component,
+  children,
+  sx,
+  register,
+  ...rest
+}: Props & InputHTMLAttributes<HTMLInputElement>) => {
   return (
-    <InputComponent as={component} sx={sx} {...rest}>
+    <InputComponent as={component} sx={sx} {...register} {...rest}>
       {children}
     </InputComponent>
   );
