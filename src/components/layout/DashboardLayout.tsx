@@ -51,7 +51,7 @@ export default DashboardLayout;
 
 const Wrapper = styled.div`
   width: 390px;
-  height: 100vh;
+  height: 100%;
   background-color: ${Colors.mainBackgroundColor};
   display: flex;
   flex-direction: column;
@@ -77,9 +77,10 @@ const Header = styled.header`
 
 const MainLayout = styled.main`
   width: 100%;
-  height: calc(100% - 54px);
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  padding-bottom: 54px;
 `;

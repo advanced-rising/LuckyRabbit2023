@@ -73,6 +73,7 @@ export const Label = ({ component, children, sx, ...rest }: Props & LabelHTMLAtt
 };
 
 const BoxComponent = styled.div<{ sx: CSSObject | undefined }>`
+  width: 100%;
   ${({ sx }) => ({ ...sx })}
 `;
 

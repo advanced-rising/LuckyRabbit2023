@@ -29,7 +29,7 @@ const DefaultFormField = ({
   ...rest
 }: Props & InputHTMLAttributes<HTMLInputElement>) => {
   return (
-    <Box component={'div'} sx={{ display: 'block', padding: '0 30px 40px', ...containerStyle }}>
+    <Box component={'div'} sx={{ display: 'block', ...containerStyle }}>
       <Label component={'label'} htmlFor={rest.id}>
         {label}
       </Label>
