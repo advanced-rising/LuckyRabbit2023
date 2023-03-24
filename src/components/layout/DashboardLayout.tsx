@@ -51,7 +51,7 @@ export default DashboardLayout;
 
 const Wrapper = styled.div`
   width: 390px;
-  height: 100%;
+  height: 100vh;
   background-color: ${Colors.mainBackgroundColor};
   display: flex;
   flex-direction: column;
