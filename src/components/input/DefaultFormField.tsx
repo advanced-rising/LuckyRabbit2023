@@ -3,14 +3,15 @@ import React, { InputHTMLAttributes } from 'react';
 import { Colors } from 'utils/Constants';
 import { CSSObject } from '@emotion/serialize';
 import styled from '@emotion/styled';
-import { UseFormRegister, FieldValues, UseFormRegisterReturn } from 'react-hook-form';
-import FormInput from 'types/FormDto';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 interface Props {
   label: string;
   sx?: CSSObject;
   containerStyle?: CSSObject;
   register?: UseFormRegisterReturn;
+  error?: FieldError;
+  errorMessage?: string;
 }
 
 export const ValidationErrorText = styled.div`
@@ -26,6 +27,9 @@ const DefaultFormField = ({
   label,
   sx,
   register,
+
+  error,
+  errorMessage,
   ...rest
 }: Props & InputHTMLAttributes<HTMLInputElement>) => {
   return (
@@ -48,7 +52,7 @@ const DefaultFormField = ({
         register={register}
         {...rest}
       />
-      <ValidationErrorText>123</ValidationErrorText>
+      {error && <ValidationErrorText>{errorMessage}</ValidationErrorText>}
     </Box>
   );
 };

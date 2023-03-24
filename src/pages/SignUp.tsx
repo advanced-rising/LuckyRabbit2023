@@ -6,20 +6,30 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import FormInput from 'types/FormDto';
 import { Colors } from 'utils/Constants';
 import { emailRegEx, passwordRegEx } from 'utils/regex';
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import * as yup from 'yup';
 
 const SignUp = () => {
+  const schema = yup.object().shape({
+    userName: yup
+      .string()
+      .required('이름을 입력해 주세요.')
+      .min(2, '이름은 2~3자로 입력해 주세요.')
+      .max(3, '이름은 2~3자로 입력해 주세요.'),
+  });
+
   const {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isDirty },
-  } = useForm<FormInput>({ mode: 'onChange' });
+    formState: { errors },
+  } = useForm<FormInput>({ resolver: yupResolver(schema), mode: 'onChange' });
 
   const onSubmit: SubmitHandler<FormInput> = (formData) => {
     console.log(formData);
     // mutate(formData);
   };
-
   return (
     <DashboardLayout>
       <Box
@@ -46,18 +56,11 @@ const SignUp = () => {
           <DefaultFormField
             label={'이름'}
             placeholder={'홍길동'}
-            register={register('userName', {
-              required: '이름을 입력해 주세요.',
-              minLength: {
-                value: 2,
-                message: '이름은 2~3자로 입력해 주세요.',
-              },
-              maxLength: {
-                value: 3,
-                message: '이름은 2~3자로 입력해 주세요.',
-              },
-            })}
+            register={register('userName')}
+            error={errors.userName && errors.userName}
+            errorMessage={errors.userName && errors.userName.message}
           />
+
           <DefaultFormField
             label={'이메일'}
             placeholder={'example@example.com'}
