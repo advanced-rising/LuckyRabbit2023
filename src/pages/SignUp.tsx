@@ -18,6 +18,13 @@ const SignUp = () => {
       .min(2, '이름은 2~3자로 입력해 주세요.')
       .max(3, '이름은 2~3자로 입력해 주세요.'),
   });
+  // email()
+  // number()
+  // matches()
+  // requied()
+  // optional()
+  // password: yup.string().required().min(8),
+  // passwordConfirm: yup.string().oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.').required(),
 
   const {
     register,
