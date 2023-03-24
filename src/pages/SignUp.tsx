@@ -56,6 +56,7 @@ const SignUp = () => {
           <DefaultFormField
             label={'이름'}
             placeholder={'홍길동'}
+            name='userName'
             register={register('userName')}
             error={errors.userName && errors.userName}
             errorMessage={errors.userName && errors.userName.message}
