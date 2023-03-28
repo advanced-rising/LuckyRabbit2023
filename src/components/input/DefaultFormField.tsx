@@ -17,7 +17,7 @@ interface Props {
 export const ValidationErrorText = styled.div`
   color: ${Colors.warningColor};
   font-size: 14px;
-  margin-top: 5px;
+  margin: 5px 0px 16px;
   padding-left: 2px;
   word-break: keep-all;
 `;
@@ -27,7 +27,6 @@ const DefaultFormField = ({
   label,
   sx,
   register,
-
   error,
   errorMessage,
   ...rest

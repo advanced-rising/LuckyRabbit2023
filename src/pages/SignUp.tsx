@@ -10,14 +10,24 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import * as yup from 'yup';
 
+const schema = yup.object().shape({
+  userName: yup
+    .string()
+    .required('이름을 입력해 주세요.')
+    .min(2, '이름은 2~3자로 입력해 주세요.')
+    .max(3, '이름은 2~3자로 입력해 주세요.'),
+  userEmail: yup.string().required('이메일을 입력해 주세요.').email('이메일 형식이 올바르지 않습니다.'),
+  userPassword: yup
+    .string()
+    .required('비밀번호를 입력해 주세요.')
+    .matches(passwordRegEx, '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.'),
+  userPasswordConfirm: yup
+    .string()
+    .required('비밀번호를 확인해 주세요.')
+    .oneOf([yup.ref('userPassword'), ''], '비밀번호가 일치하지 않습니다.'),
+});
+
 const SignUp = () => {
-  const schema = yup.object().shape({
-    userName: yup
-      .string()
-      .required('이름을 입력해 주세요.')
-      .min(2, '이름은 2~3자로 입력해 주세요.')
-      .max(3, '이름은 2~3자로 입력해 주세요.'),
-  });
   // email()
   // number()
   // matches()
@@ -61,6 +71,7 @@ const SignUp = () => {
       <Box component={'article'} sx={{ padding: '0 30px' }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DefaultFormField
+            type={'text'}
             label={'이름'}
             placeholder={'홍길동'}
             name='userName'
@@ -70,34 +81,28 @@ const SignUp = () => {
           />
 
           <DefaultFormField
+            type={'email'}
             label={'이메일'}
             placeholder={'example@example.com'}
-            register={register('userEmail', {
-              required: '이메일을 입력해 주세요.',
-              pattern: {
-                value: emailRegEx,
-                message: '이메일 형식이 올바르지 않습니다.',
-              },
-            })}
+            register={register('userEmail')}
+            error={errors.userEmail && errors.userEmail}
+            errorMessage={errors.userEmail && errors.userEmail.message}
           />
           <DefaultFormField
+            type={'password'}
             label={'비밀번호'}
             placeholder={'********'}
-            register={register('userPassword', {
-              required: '비밀번호를 입력해 주세요.',
-              pattern: {
-                value: passwordRegEx,
-                message: '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.',
-              },
-            })}
+            register={register('userPassword')}
+            error={errors.userPassword && errors.userPassword}
+            errorMessage={errors.userPassword && errors.userPassword.message}
           />
           <DefaultFormField
+            type={'password'}
             label={'비밀번호 확인'}
             placeholder={'********'}
-            register={register('userPasswordConfirm', {
-              required: true,
-              // validate: (value) => value === passwordInput.current,
-            })}
+            register={register('userPasswordConfirm')}
+            error={errors.userPasswordConfirm && errors.userPasswordConfirm}
+            errorMessage={errors.userPasswordConfirm && errors.userPasswordConfirm.message}
           />
           <Box sx={{ paddingTop: '60px' }}>
             <DefaultButton
