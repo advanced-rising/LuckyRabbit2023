@@ -1,14 +1,7 @@
-import DefaultButton from 'components/button/DefaultButton';
-import {
-  BlueFannyPack,
-  GreenFannyPack,
-  OrangeFannyPack,
-  RedFannyPack,
-  YellowFannyPack,
-} from 'components/Icons/FannyPacks';
-import { Money1000, Money10000, Money5000, Money50000, MoneyNot } from 'components/Icons/Money';
+import styled from '@emotion/styled';
+import DefaultFormField from 'components/input/DefaultFormField';
 import DashboardLayout from 'components/layout/DashboardLayout';
-import { Box, IconButton, Typo } from 'components/ui/Element';
+import { Box, Typo } from 'components/ui/Element';
 import React from 'react';
 import { Colors } from 'utils/Constants';
 
@@ -33,80 +26,21 @@ const Send = () => {
           </Typo>
         </Box>
       }>
-      <Box component={'section'}>
+      <Box component={'section'} sx={{ padding: '0 30px' }}>
         <Box component={'article'} sx={{ paddingTop: '30px' }}>
           <Box
             sx={{
               width: 330,
-              height: 285,
-              backgroundImage: `url('/assets/pocket-select-box-bg.png')`,
-              backgroundSize: 'cover',
+              height: 500,
+              backgroundImage: `url('/assets/letter-yellow_bg.png')`,
+              backgroundSize: 'contain',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
+              padding: '30px',
             }}>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-                gap: '10px',
-                paddingTop: '48px',
-              }}>
-              <Box>
-                <IconButton>
-                  <RedFannyPack />
-                </IconButton>
-                <IconButton>
-                  <BlueFannyPack />
-                </IconButton>
-                <IconButton>
-                  <GreenFannyPack />
-                </IconButton>
-              </Box>
-              <Box>
-                <IconButton>
-                  <YellowFannyPack />
-                </IconButton>
-                <IconButton>
-                  <OrangeFannyPack />
-                </IconButton>
-              </Box>
-            </Box>
+            <DefaultFormField label='' containerStyle={{ paddingTop: '100px' }} />
+            <TextArea />
           </Box>
-        </Box>
-        <Box component={'article'} sx={{ paddingTop: '64px' }}>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'start',
-              flexDirection: 'column',
-              gap: '15px',
-            }}>
-            <Box>
-              <IconButton sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}>
-                <Money1000 />
-              </IconButton>
-              <IconButton sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}>
-                <Money5000 />
-              </IconButton>
-              <IconButton sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}>
-                <Money10000 />
-              </IconButton>
-            </Box>
-            <Box>
-              <IconButton sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}>
-                <Money50000 />
-              </IconButton>
-              <IconButton>
-                <MoneyNot />
-              </IconButton>
-            </Box>
-          </Box>
-        </Box>
-        <Box sx={{ paddingTop: '45px' }} component={'article'}>
-          <DefaultButton>다음</DefaultButton>
         </Box>
       </Box>
     </DashboardLayout>
@@ -114,3 +48,11 @@ const Send = () => {
 };
 
 export default Send;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  min-height: 200px;
+  resize: none;
+  background-color: transparent;
+  overflow-y: hidden;
+`;
