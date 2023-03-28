@@ -73,8 +73,8 @@ const SignUp = () => {
           <DefaultFormField
             type={'text'}
             label={'이름'}
+            required={true}
             placeholder={'홍길동'}
-            name='userName'
             register={register('userName')}
             error={errors.userName && errors.userName}
             errorMessage={errors.userName && errors.userName.message}
@@ -83,6 +83,7 @@ const SignUp = () => {
           <DefaultFormField
             type={'email'}
             label={'이메일'}
+            required={true}
             placeholder={'example@example.com'}
             register={register('userEmail')}
             error={errors.userEmail && errors.userEmail}
@@ -91,6 +92,7 @@ const SignUp = () => {
           <DefaultFormField
             type={'password'}
             label={'비밀번호'}
+            required={true}
             placeholder={'********'}
             register={register('userPassword')}
             error={errors.userPassword && errors.userPassword}
@@ -99,6 +101,7 @@ const SignUp = () => {
           <DefaultFormField
             type={'password'}
             label={'비밀번호 확인'}
+            required={true}
             placeholder={'********'}
             register={register('userPasswordConfirm')}
             error={errors.userPasswordConfirm && errors.userPasswordConfirm}

@@ -7,6 +7,7 @@ import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 interface Props {
   label: string;
+  required: boolean;
   sx?: CSSObject;
   containerStyle?: CSSObject;
   register?: UseFormRegisterReturn;
@@ -22,11 +23,29 @@ export const ValidationErrorText = styled.div`
   word-break: keep-all;
 `;
 
+export const ValidationLabelStyle = styled.strong`
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Pretendard';
+`;
+
+export const ValidationRequiredLabelStyle = styled.strong`
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Pretendard';
+
+  &::after {
+    content: '*';
+    color: ${Colors.warningColor};
+  }
+`;
+
 const DefaultFormField = ({
   containerStyle,
   label,
   sx,
   register,
+  required,
   error,
   errorMessage,
   ...rest
@@ -34,7 +53,11 @@ const DefaultFormField = ({
   return (
     <Box component={'div'} sx={{ display: 'block', ...containerStyle }}>
       <Label component={'label'} htmlFor={rest.id}>
-        {label}
+        {required ? (
+          <ValidationRequiredLabelStyle>{label}</ValidationRequiredLabelStyle>
+        ) : (
+          <ValidationLabelStyle>{label}</ValidationLabelStyle>
+        )}
       </Label>
       <Input
         id={rest.id}
