@@ -6,8 +6,8 @@ import styled from '@emotion/styled';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 interface Props {
-  label: string;
-  required: boolean;
+  label?: string;
+  required?: boolean;
   sx?: CSSObject;
   containerStyle?: CSSObject;
   register?: UseFormRegisterReturn;
@@ -16,10 +16,10 @@ interface Props {
 }
 
 export const ValidationErrorText = styled.div`
+  position: absolute;
+  bottom: -2px;
   color: ${Colors.warningColor};
   font-size: 14px;
-  margin: 5px 0px 16px;
-  padding-left: 2px;
   word-break: keep-all;
 `;
 
@@ -51,7 +51,12 @@ const DefaultFormField = ({
   ...rest
 }: Props & InputHTMLAttributes<HTMLInputElement>) => {
   return (
-    <Box component={'div'} sx={{ display: 'block', ...containerStyle }}>
+    <Box
+      component={'div'}
+      sx={{
+        position: 'relative',
+        ...containerStyle,
+      }}>
       <Label component={'label'} htmlFor={rest.id}>
         {required ? (
           <ValidationRequiredLabelStyle>{label}</ValidationRequiredLabelStyle>
@@ -67,7 +72,7 @@ const DefaultFormField = ({
           height: '32px',
           backgroundColor: 'transparent',
           borderBottom: `1px solid ${Colors.mainTitleColor}`,
-          marginTop: '16px',
+          margin: '5px 0px 18px',
           paddingLeft: '2px',
           ...sx,
         }}

@@ -28,14 +28,6 @@ const schema = yup.object().shape({
 });
 
 const SignUp = () => {
-  // email()
-  // number()
-  // matches()
-  // requied()
-  // optional()
-  // password: yup.string().required().min(8),
-  // passwordConfirm: yup.string().oneOf([yup.ref('password'), null], '비밀번호가 일치하지 않습니다.').required(),
-
   const {
     register,
     handleSubmit,
@@ -70,57 +62,59 @@ const SignUp = () => {
 
       <Box component={'article'} sx={{ padding: '0 30px' }}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <DefaultFormField
-            type={'text'}
-            label={'이름'}
-            required={true}
-            placeholder={'홍길동'}
-            register={register('userName')}
-            error={errors.userName && errors.userName}
-            errorMessage={errors.userName && errors.userName.message}
-          />
+          <Box component={'div'} sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <DefaultFormField
+              type={'text'}
+              label={'이름'}
+              required={true}
+              placeholder={'홍길동'}
+              register={register('userName')}
+              error={errors.userName && errors.userName}
+              errorMessage={errors.userName && errors.userName.message}
+            />
 
-          <DefaultFormField
-            type={'email'}
-            label={'이메일'}
-            required={true}
-            placeholder={'example@example.com'}
-            register={register('userEmail')}
-            error={errors.userEmail && errors.userEmail}
-            errorMessage={errors.userEmail && errors.userEmail.message}
-          />
-          <DefaultFormField
-            type={'password'}
-            label={'비밀번호'}
-            required={true}
-            placeholder={'********'}
-            register={register('userPassword')}
-            error={errors.userPassword && errors.userPassword}
-            errorMessage={errors.userPassword && errors.userPassword.message}
-          />
-          <DefaultFormField
-            type={'password'}
-            label={'비밀번호 확인'}
-            required={true}
-            placeholder={'********'}
-            register={register('userPasswordConfirm')}
-            error={errors.userPasswordConfirm && errors.userPasswordConfirm}
-            errorMessage={errors.userPasswordConfirm && errors.userPasswordConfirm.message}
-          />
-          <Box sx={{ paddingTop: '60px' }}>
-            <DefaultButton
-              type='submit'
-              sx={{
-                width: '330px',
-                height: '50px',
-                fontSize: '16px',
-                color: Colors.bgColor,
-                backgroundColor: Colors.mainColor,
-                border: '0px',
-                cursor: 'pointer',
-              }}>
-              회원가입
-            </DefaultButton>
+            <DefaultFormField
+              type={'email'}
+              label={'이메일'}
+              required={true}
+              placeholder={'example@example.com'}
+              register={register('userEmail')}
+              error={errors.userEmail && errors.userEmail}
+              errorMessage={errors.userEmail && errors.userEmail.message}
+            />
+            <DefaultFormField
+              type={'password'}
+              label={'비밀번호'}
+              required={true}
+              placeholder={'********'}
+              register={register('userPassword')}
+              error={errors.userPassword && errors.userPassword}
+              errorMessage={errors.userPassword && errors.userPassword.message}
+            />
+            <DefaultFormField
+              type={'password'}
+              label={'비밀번호 확인'}
+              required={true}
+              placeholder={'********'}
+              register={register('userPasswordConfirm')}
+              error={errors.userPasswordConfirm && errors.userPasswordConfirm}
+              errorMessage={errors.userPasswordConfirm && errors.userPasswordConfirm.message}
+            />
+            <Box sx={{ paddingTop: '60px' }}>
+              <DefaultButton
+                type='submit'
+                sx={{
+                  width: '330px',
+                  height: '50px',
+                  fontSize: '16px',
+                  color: Colors.bgColor,
+                  backgroundColor: Colors.mainColor,
+                  border: '0px',
+                  cursor: 'pointer',
+                }}>
+                회원가입
+              </DefaultButton>
+            </Box>
           </Box>
         </form>
       </Box>
