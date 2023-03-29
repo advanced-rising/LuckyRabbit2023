@@ -86,6 +86,7 @@ const TypoComponent = styled.p<{ sx: CSSObject | undefined }>`
 `;
 
 const IconButtonComponent = styled.button<{ sx: CSSObject | undefined }>`
+  padding: 0;
   border: 0;
   background-color: transparent;
   color: #000;

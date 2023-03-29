@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { keyframes } from '@emotion/react';
 import { useAppSelector } from 'redux/storeHooks';
 import useModals from 'hooks/shared/useModals';
+import { createPortal } from 'react-dom';
 
 const fadeOut = keyframes`
   0% {
@@ -43,7 +44,10 @@ const Modals = () => {
             closeModal(Component);
           }, ANIMATION_TIME);
         };
-        return <Component key={index} modalOpen onClose={onClose} fade={fade} {...props} />;
+        return createPortal(
+          <Component key={index} modalOpen onClose={onClose} fade={fade} {...props} />,
+          document.getElementById('root') as HTMLElement,
+        );
       })}
     </>
   );

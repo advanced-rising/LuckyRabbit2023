@@ -6,9 +6,10 @@ import styled from '@emotion/styled';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 interface Props {
-  label: string;
+  label?: string;
   sx?: CSSObject;
   containerStyle?: CSSObject;
+
   register?: UseFormRegisterReturn;
   error?: FieldError;
   errorMessage?: string;
@@ -34,9 +35,11 @@ const DefaultFormField = ({
 }: Props & InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <Box component={'div'} sx={{ display: 'block', ...containerStyle }}>
-      <Label component={'label'} htmlFor={rest.id}>
-        {label}
-      </Label>
+      {label && (
+        <Label component={'label'} htmlFor={rest.id}>
+          {label}
+        </Label>
+      )}
       <Input
         id={rest.id}
         component={'input'}
