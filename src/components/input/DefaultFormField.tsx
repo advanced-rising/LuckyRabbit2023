@@ -6,10 +6,10 @@ import styled from '@emotion/styled';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 interface Props {
-  label: string;
-  required: boolean;
+  label?: string;
   sx?: CSSObject;
   containerStyle?: CSSObject;
+  required: boolean;
   register?: UseFormRegisterReturn;
   error?: FieldError;
   errorMessage?: string;
@@ -59,6 +59,11 @@ const DefaultFormField = ({
           <ValidationLabelStyle>{label}</ValidationLabelStyle>
         )}
       </Label>
+      {label && (
+        <Label component={'label'} htmlFor={rest.id}>
+          {label}
+        </Label>
+      )}
       <Input
         id={rest.id}
         component={'input'}
