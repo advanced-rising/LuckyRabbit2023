@@ -10,7 +10,11 @@ import {
 import { Money1000, Money10000, Money5000, Money50000, MoneyNot } from 'components/Icons/Money';
 import DashboardLayout from 'components/layout/DashboardLayout';
 import { Box, IconButton, Typo } from 'components/ui/Element';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { selectPackAndMoney } from 'redux/slices/select';
+
+import { useAppDispatch } from 'redux/storeHooks';
 import { Colors } from 'utils/Constants';
 
 const enum SELECT_PACK {
@@ -32,10 +36,16 @@ const enum SELECT_MONEY {
 const Select = () => {
   const [selectPack, setSelectPack] = useState<SELECT_PACK>();
   const [selectMoney, setSelectMoney] = useState<SELECT_MONEY>();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(selectPackAndMoney({ selectPack, selectMoney }));
+  }, [selectPack, selectMoney, dispatch]);
 
   return (
     <DashboardLayout
-      back
+      back={() => navigate('/')}
       title={
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
           <Typo component={'span'} sx={{ fontSize: 25, fontWeight: 700, color: Colors.subTextB }}>
@@ -184,7 +194,7 @@ const Select = () => {
           </Box>
         </Box>
         <Box sx={{ paddingTop: '45px' }} component={'article'}>
-          <DefaultButton>다음</DefaultButton>
+          <DefaultButton onClick={() => navigate('/send')}>다음</DefaultButton>
         </Box>
       </Box>
     </DashboardLayout>

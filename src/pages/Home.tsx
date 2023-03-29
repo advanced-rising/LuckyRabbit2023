@@ -143,7 +143,7 @@ const Home = () => {
             }}>
             <DefaultButton>받은 복주머니 보러가기</DefaultButton>
             <Typo>복주머니 보내기를 연습해보세요! 🐰</Typo>
-            <DefaultButton IconComponent={<Icon />} iconAlign='left' onClick={() => navigate('/send')}>
+            <DefaultButton IconComponent={<Icon />} iconAlign='left' onClick={() => navigate('/select')}>
               달토끼에게 복주머니 보내기
             </DefaultButton>
           </Box>
