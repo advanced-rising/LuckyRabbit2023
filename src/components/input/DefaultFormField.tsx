@@ -9,7 +9,7 @@ interface Props {
   label?: string;
   sx?: CSSObject;
   containerStyle?: CSSObject;
-
+  required: boolean;
   register?: UseFormRegisterReturn;
   error?: FieldError;
   errorMessage?: string;
@@ -18,9 +18,26 @@ interface Props {
 export const ValidationErrorText = styled.div`
   color: ${Colors.warningColor};
   font-size: 14px;
-  margin-top: 5px;
+  margin: 5px 0px 16px;
   padding-left: 2px;
   word-break: keep-all;
+`;
+
+export const ValidationLabelStyle = styled.strong`
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Pretendard';
+`;
+
+export const ValidationRequiredLabelStyle = styled.strong`
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'Pretendard';
+
+  &::after {
+    content: '*';
+    color: ${Colors.warningColor};
+  }
 `;
 
 const DefaultFormField = ({
@@ -28,13 +45,20 @@ const DefaultFormField = ({
   label,
   sx,
   register,
-
+  required,
   error,
   errorMessage,
   ...rest
 }: Props & InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <Box component={'div'} sx={{ display: 'block', ...containerStyle }}>
+      <Label component={'label'} htmlFor={rest.id}>
+        {required ? (
+          <ValidationRequiredLabelStyle>{label}</ValidationRequiredLabelStyle>
+        ) : (
+          <ValidationLabelStyle>{label}</ValidationLabelStyle>
+        )}
+      </Label>
       {label && (
         <Label component={'label'} htmlFor={rest.id}>
           {label}
