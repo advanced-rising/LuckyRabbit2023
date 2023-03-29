@@ -20,8 +20,6 @@ export const ValidationErrorText = styled.div`
   bottom: -2px;
   color: ${Colors.warningColor};
   font-size: 14px;
-  margin: 5px 0px 16px;
-  padding-left: 2px;
   word-break: keep-all;
 `;
 
