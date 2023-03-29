@@ -10,6 +10,7 @@ interface Props {
   required?: boolean;
   sx?: CSSObject;
   containerStyle?: CSSObject;
+  required: boolean;
   register?: UseFormRegisterReturn;
   error?: FieldError;
   errorMessage?: string;
@@ -20,6 +21,8 @@ export const ValidationErrorText = styled.div`
   bottom: -2px;
   color: ${Colors.warningColor};
   font-size: 14px;
+  margin: 5px 0px 16px;
+  padding-left: 2px;
   word-break: keep-all;
 `;
 
@@ -64,6 +67,11 @@ const DefaultFormField = ({
           <ValidationLabelStyle>{label}</ValidationLabelStyle>
         )}
       </Label>
+      {label && (
+        <Label component={'label'} htmlFor={rest.id}>
+          {label}
+        </Label>
+      )}
       <Input
         id={rest.id}
         component={'input'}

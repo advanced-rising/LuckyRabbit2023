@@ -1,21 +1,25 @@
+import styled from '@emotion/styled';
 import DefaultButton from 'components/button/DefaultButton';
-import {
-  BlueFannyPack,
-  GreenFannyPack,
-  OrangeFannyPack,
-  RedFannyPack,
-  YellowFannyPack,
-} from 'components/Icons/FannyPacks';
-import { Money1000, Money10000, Money5000, Money50000, MoneyNot } from 'components/Icons/Money';
+import DefaultFormField from 'components/input/DefaultFormField';
 import DashboardLayout from 'components/layout/DashboardLayout';
-import { Box, IconButton, Typo } from 'components/ui/Element';
+import SuccessSendModal from 'components/modal/SuccessSendModal';
+import { Box, Typo } from 'components/ui/Element';
+import useModals from 'hooks/shared/useModals';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Colors } from 'utils/Constants';
 
 const Send = () => {
+  const navigate = useNavigate();
+  const { openModal } = useModals();
+
+  const sendFanny = () => {
+    openModal(SuccessSendModal, { props: {} });
+  };
+
   return (
     <DashboardLayout
-      back
+      back={() => navigate('/select')}
       title={
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
           <Typo component={'span'} sx={{ fontSize: 25, fontWeight: 700, color: Colors.subTextB }}>
@@ -33,80 +37,73 @@ const Send = () => {
           </Typo>
         </Box>
       }>
-      <Box component={'section'}>
+      <Box component={'section'} sx={{ padding: '0 30px' }}>
         <Box component={'article'} sx={{ paddingTop: '30px' }}>
           <Box
             sx={{
               width: 330,
-              height: 285,
-              backgroundImage: `url('/assets/pocket-select-box-bg.png')`,
-              backgroundSize: 'cover',
+              height: 500,
+              backgroundImage: `url('/assets/letter-yellow_bg.png')`,
+              backgroundSize: 'contain',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
+              padding: '30px',
             }}>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-                gap: '10px',
-                paddingTop: '48px',
-              }}>
-              <Box>
-                <IconButton>
-                  <RedFannyPack />
-                </IconButton>
-                <IconButton>
-                  <BlueFannyPack />
-                </IconButton>
-                <IconButton>
-                  <GreenFannyPack />
-                </IconButton>
-              </Box>
-              <Box>
-                <IconButton>
-                  <YellowFannyPack />
-                </IconButton>
-                <IconButton>
-                  <OrangeFannyPack />
-                </IconButton>
+            <Box sx={{ width: 'auto', minWidth: '200px', position: 'relative' }}>
+              <DefaultFormField
+                containerStyle={{ width: 'auto', paddingTop: '100px' }}
+                sx={{
+                  width: 'auto',
+
+                  paddingLeft: '30px',
+                  fontSize: 18,
+                  fontWeight: 700,
+                  color: Colors.subTextB,
+                }}
+              />
+              <Typo
+                sx={{
+                  position: 'absolute',
+                  bottom: '6px',
+                  left: 0,
+                  fontSize: 18,
+                  fontWeight: 700,
+                  color: Colors.subTextB,
+                }}>
+                To.
+              </Typo>
+            </Box>
+            <Box sx={{ paddingTop: '20px' }}>
+              <TextArea />
+              <Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'end', gap: '8px', paddingTop: '10px' }}>
+                <Typo
+                  sx={{
+                    textAlign: 'end',
+                    fontSize: 18,
+                    fontWeight: 700,
+                    color: Colors.subTextB,
+                    paddingBottom: '8px',
+                  }}>
+                  From. 익명이
+                </Typo>
+                <Box
+                  sx={{
+                    width: 42,
+                    height: 42,
+                    backgroundImage: `url('/assets/yellow_cat.png')`,
+                    backgroundSize: 'contain',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                />
               </Box>
             </Box>
           </Box>
-        </Box>
-        <Box component={'article'} sx={{ paddingTop: '64px' }}>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'start',
-              flexDirection: 'column',
-              gap: '15px',
-            }}>
-            <Box>
-              <IconButton sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}>
-                <Money1000 />
-              </IconButton>
-              <IconButton sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}>
-                <Money5000 />
-              </IconButton>
-              <IconButton sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}>
-                <Money10000 />
-              </IconButton>
-            </Box>
-            <Box>
-              <IconButton sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}>
-                <Money50000 />
-              </IconButton>
-              <IconButton>
-                <MoneyNot />
-              </IconButton>
-            </Box>
+          <Box sx={{ paddingTop: '40px' }}>
+            <DefaultButton sx={{}} onClick={sendFanny}>
+              보내기
+            </DefaultButton>
           </Box>
-        </Box>
-        <Box sx={{ paddingTop: '45px' }} component={'article'}>
-          <DefaultButton>다음</DefaultButton>
         </Box>
       </Box>
     </DashboardLayout>
@@ -114,3 +111,12 @@ const Send = () => {
 };
 
 export default Send;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  min-height: 200px;
+  resize: none;
+  background-color: transparent;
+  /* background-color: #fff; */
+  overflow-y: hidden;
+`;

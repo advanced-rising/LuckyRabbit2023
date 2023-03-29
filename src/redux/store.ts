@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 
-import uiReducer, { UiState } from './slices/ui';
+import uiReducer from './slices/ui';
+import selectReducer from './slices/select';
 
 // https://stackoverflow.com/questions/69978434/persist-reducer-function-giving-type-error-to-my-reducer-in-typescript
 const rootReducer = combineReducers({
   ui: uiReducer,
+  select: selectReducer,
 });
 
 export const store = configureStore({
