@@ -9,7 +9,7 @@ const DashboardLayout = ({
   title,
   children,
 }: {
-  back?: boolean;
+  back?: () => void;
   title?: React.ReactNode;
   children: React.ReactNode;
 }) => {
@@ -31,6 +31,7 @@ const DashboardLayout = ({
         )}
         {back && (
           <IconButton
+            onClick={() => back()}
             sx={{
               position: 'absolute',
               top: '94px',
