@@ -5,6 +5,7 @@ import { Colors } from 'utils/Constants';
 
 interface Props {
   sx?: CSSObject;
+  labelStyle?: CSSObject;
   children: React.ReactNode;
   IconComponent?: React.ReactNode;
   iconAlign?: 'left' | 'right';
@@ -14,6 +15,7 @@ const DefaultButton = ({
   children,
   IconComponent,
   iconAlign,
+  labelStyle,
   sx,
   ...rest
 }: Props & ButtonHTMLAttributes<HTMLButtonElement>) => {
@@ -46,6 +48,7 @@ const DefaultButton = ({
           color: Colors.fontColor,
           fontSize: 16,
           fontWeight: 400,
+          ...labelStyle,
         }}>
         {children}
       </Typo>

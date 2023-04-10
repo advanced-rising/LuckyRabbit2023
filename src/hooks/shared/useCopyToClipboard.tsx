@@ -1,63 +1,65 @@
+import copyToClipboard from 'copy-to-clipboard';
 import { useState } from 'react';
 
 type CopiedValue = string | null;
 type CopyFn = (text: string) => Promise<boolean>; // Return success
 
 /**
- * @usage const [copiedText, copy] = useCopyToClipboard()
+ * @usage const [copiedText, copy] = useCopyDToClipboard()
  * @usage <button onClick={() => copy('A')}>A</button>
  * @returns [copiedText, copy]
  */
+
 function useCopyToClipboard(): [CopiedValue, CopyFn] {
-  const [copiedText, setCopiedText] = useState<CopiedValue>(null);
+  const [copiedText, setLastCopiedText] = useState<CopiedValue>(null);
 
   const copy: CopyFn = async (text) => {
-    if (!navigator.clipboard) {
-      // execCommand 사용
-      const textArea = document.createElement('textarea');
-      const input = document.createElement('input');
-      input.setAttribute('readonly', 'true');
-      input.setAttribute('value', text);
-      textArea.value = text;
-
-      document.body.appendChild(textArea);
-      document.body.appendChild(input);
-      textArea.select();
-      input.select();
-      textArea.setSelectionRange(0, 99999);
-      input.setSelectionRange(0, 99999);
+    if (copyToClipboard) {
       try {
-        setCopiedText(text);
-        document.execCommand('copy');
-        document.execCommand('copy');
-
+        copyToClipboard(text);
+        setLastCopiedText(text);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      if (!navigator.clipboard) {
+        console.log('THIS execCommand right!');
+        const textArea = document.createElement('textarea');
+        const input = document.createElement('input');
+        input.setAttribute('readonly', 'true');
+        input.setAttribute('value', text);
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        document.body.appendChild(input);
+        textArea.select();
+        input.select();
+        textArea.setSelectionRange(0, 99999);
+        input.setSelectionRange(0, 99999);
+        try {
+          document.execCommand('copy');
+          setLastCopiedText(text);
+        } catch (error) {
+          console.log(error);
+        }
         textArea.setSelectionRange(0, 0);
         document.body.removeChild(textArea);
         document.body.removeChild(input);
-        return true;
-      } catch (err) {
-        setCopiedText(null);
-        textArea.setSelectionRange(0, 0);
-        document.body.removeChild(textArea);
-        return false;
-      }
-    } else {
-      try {
-        await navigator.clipboard.writeText(text);
-        setCopiedText(text);
-        return true;
-      } catch (error) {
-        setCopiedText(null);
-        return false;
+      } else {
+        try {
+          console.log('THIS navigator.clipboard right!');
+          await navigator.clipboard.writeText(text);
+          setLastCopiedText(text);
+        } catch (error) {
+          console.log(error);
+        }
       }
     }
-  }; // Try to save to clipboard then save it in the state if worked
+    return true;
+  };
 
   return [copiedText, copy];
 }
-
 export default useCopyToClipboard;
-
 // usage
 // import { useCopyToClipboard } from 'usehooks-ts'
 

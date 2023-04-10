@@ -1,13 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
 import DefaultButton from 'components/button/DefaultButton';
 import DashboardLayout from 'components/layout/DashboardLayout';
+import SuccessCopyModal from 'components/modal/SuccessCopyModal';
 import { Box, IconButton, Typo } from 'components/ui/Element';
+import useCopyToClipboard from 'hooks/shared/useCopyToClipboard';
+import useModals from 'hooks/shared/useModals';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Colors } from 'utils/Constants';
 
 const Home = () => {
   const navigate = useNavigate();
+
+  const [, copy] = useCopyToClipboard();
+
+  const { openModal } = useModals();
+
+  const _onCopy = async () => {
+    try {
+      await copy(window?.location.href);
+
+      openModal(SuccessCopyModal, { props: {} });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <DashboardLayout>
@@ -93,6 +110,7 @@ const Home = () => {
               gap: '8px',
             }}>
             <IconButton
+              onClick={() => _onCopy()}
               sx={{
                 width: 60,
                 height: 60,
@@ -141,7 +159,7 @@ const Home = () => {
               flexDirection: 'column',
               gap: '20px',
             }}>
-            <DefaultButton>받은 복주머니 보러가기</DefaultButton>
+            <DefaultButton onClick={() => navigate('/list')}>받은 복주머니 보러가기</DefaultButton>
             <Typo>복주머니 보내기를 연습해보세요! 🐰</Typo>
             <DefaultButton IconComponent={<Icon />} iconAlign='left' onClick={() => navigate('/select')}>
               달토끼에게 복주머니 보내기

@@ -1,4 +1,5 @@
 import Home from 'pages/Home';
+import List from 'pages/List';
 import Select from 'pages/Select';
 import Send from 'pages/Send';
 import SignUp from 'pages/SignUp';
@@ -12,6 +13,7 @@ const AppRoutes = () => {
       <Route path='/signup' element={<SignUp />}></Route>
       <Route path='/select' element={<Select />}></Route>
       <Route path='/send' element={<Send />}></Route>
+      <Route path='/list' element={<List />}></Route>
     </Routes>
   );
 };

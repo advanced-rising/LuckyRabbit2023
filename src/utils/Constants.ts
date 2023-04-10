@@ -7,6 +7,7 @@ export const Colors = {
   subTextG: '#9E9E9E',
   warningColor: '#E26F6B',
   bgColor: '#FFFFFF',
+  disableBg: '#D9D9D9',
   fontColor: '#FFFFFF',
 } as const;
 
