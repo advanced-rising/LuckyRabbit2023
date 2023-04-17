@@ -13,21 +13,12 @@ import authApi from 'apis/authApi';
 import { useNavigate } from 'react-router-dom';
 
 const schema = yup.object().shape({
-  userName: yup
-    .string()
-    .required('이름을 입력해 주세요.')
-    .min(2, '이름은 2~3자로 입력해 주세요.')
-    .max(3, '이름은 2~3자로 입력해 주세요.'),
   userEmail: yup.string().email('이메일 형식이 올바르지 않습니다.').required('이메일을 입력해 주세요.'),
   userPassword: yup.string().required('비밀번호를 입력해 주세요.'),
   // .matches(passwordRegEx, '8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.'),
-  userPasswordConfirm: yup
-    .string()
-    .required('비밀번호를 확인해 주세요.')
-    .oneOf([yup.ref('userPassword'), ''], '비밀번호가 일치하지 않습니다.'),
 });
 
-const SignUp = () => {
+const SignIn = () => {
   const navigate = useNavigate();
 
   const {
@@ -40,13 +31,16 @@ const SignUp = () => {
   const onSubmit: SubmitHandler<FormInput> = async (formData) => {
     console.log(formData);
     try {
-      await authApi.signup({
-        username: formData.userName,
+      const data: { accessToken: string } = await authApi.signin({
         email: formData.userEmail,
         password: formData.userPassword,
       });
 
-      navigate('/signin');
+      console.log('accessToken', data);
+      if (data.accessToken) {
+        localStorage.setItem(JWT_TOKEN_NAME, data.accessToken);
+      }
+      navigate('/');
     } catch (error) {
       console.log(error);
       throw error;
@@ -79,16 +73,6 @@ const SignUp = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <Box component={'div'} sx={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
             <DefaultFormField
-              type={'text'}
-              label={'이름'}
-              required={true}
-              placeholder={'홍길동'}
-              register={register('userName')}
-              error={errors.userName && errors.userName}
-              errorMessage={errors.userName && errors.userName.message}
-            />
-
-            <DefaultFormField
               type={'email'}
               label={'이메일'}
               required={true}
@@ -106,15 +90,7 @@ const SignUp = () => {
               error={errors.userPassword && errors.userPassword}
               errorMessage={errors.userPassword && errors.userPassword.message}
             />
-            <DefaultFormField
-              type={'password'}
-              label={'비밀번호 확인'}
-              required={true}
-              placeholder={'********'}
-              register={register('userPasswordConfirm')}
-              error={errors.userPasswordConfirm && errors.userPasswordConfirm}
-              errorMessage={errors.userPasswordConfirm && errors.userPasswordConfirm.message}
-            />
+
             <Box sx={{ paddingTop: '60px' }}>
               <DefaultButton
                 type='submit'
@@ -127,7 +103,7 @@ const SignUp = () => {
                   border: '0px',
                   cursor: 'pointer',
                 }}>
-                회원가입
+                로그인
               </DefaultButton>
             </Box>
           </Box>
@@ -136,4 +112,4 @@ const SignUp = () => {
     </DashboardLayout>
   );
 };
-export default SignUp;
+export default SignIn;
