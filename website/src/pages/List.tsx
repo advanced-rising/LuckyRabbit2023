@@ -1,6 +1,7 @@
 import DefaultButton from 'components/button/DefaultButton';
 import DashboardLayout from 'components/layout/DashboardLayout';
 import { Box, Typo, Button } from 'components/ui/Element';
+import usePacksQuery from 'hooks/queries/usePacks';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Colors } from 'utils/Constants';
@@ -15,6 +16,14 @@ const List = () => {
   const _onRead = () => {
     return;
   };
+
+  const { data: packs } = usePacksQuery({
+    select: (data) => {
+      return data;
+    },
+  });
+
+  console.log('packs', packs);
 
   return (
     <DashboardLayout
@@ -66,7 +75,7 @@ const List = () => {
             flexWrap: 'wrap',
             gap: '45px',
           }}>
-          {[...Array(10)].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((pack, index) => {
+          {packs?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((pack, index) => {
             return (
               <Box
                 key={index}

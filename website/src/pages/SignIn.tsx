@@ -36,7 +36,6 @@ const SignIn = () => {
         password: formData.userPassword,
       });
 
-      console.log('accessToken', data);
       if (data.accessToken) {
         localStorage.setItem(JWT_TOKEN_NAME, data.accessToken);
       }
@@ -45,8 +44,6 @@ const SignIn = () => {
       console.log(error);
       throw error;
     }
-
-    // mutate(formData);
   };
   return (
     <DashboardLayout>
