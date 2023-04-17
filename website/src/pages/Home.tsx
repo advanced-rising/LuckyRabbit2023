@@ -3,6 +3,7 @@ import DefaultButton from 'components/button/DefaultButton';
 import DashboardLayout from 'components/layout/DashboardLayout';
 import SuccessCopyModal from 'components/modal/SuccessCopyModal';
 import { Box, IconButton, Typo } from 'components/ui/Element';
+import useUserQuery from 'hooks/queries/useUserQuery';
 import useCopyToClipboard from 'hooks/shared/useCopyToClipboard';
 import useModals from 'hooks/shared/useModals';
 import React from 'react';
@@ -26,6 +27,8 @@ const Home = () => {
     }
   };
 
+  const { data: me } = useUserQuery();
+  console.log('me ', me);
   return (
     <DashboardLayout>
       <Box
