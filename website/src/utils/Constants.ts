@@ -12,5 +12,10 @@ export const Colors = {
 } as const;
 
 export const BASE_URL = (() => {
-  return 'http://ec2-15-165-104-125.ap-northeast-2.compute.amazonaws.com:8080';
+  // return 'http://ec2-15-165-104-125.ap-northeast-2.compute.amazonaws.com:8080';
+  return 'http://localhost:3005';
+})();
+
+export const JWT_TOKEN_NAME = (() => {
+  return 'luckyrabbit_accesstoken';
 })();

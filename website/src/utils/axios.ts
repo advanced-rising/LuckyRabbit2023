@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from './Constants';
+import { BASE_URL, JWT_TOKEN_NAME } from './Constants';
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -16,7 +16,13 @@ if (process.env.NEXT_PUBLIC_BASE_URL) {
 }
 
 axiosInstance.interceptors.response.use(
-  (response) => response,
+  (config) => {
+    const accessToken = localStorage.getItem(JWT_TOKEN_NAME);
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
   (error) => {
     if (error.response.data?.error && error.response.data.error.message) {
       //5초 동안 오는 응답에 대해서 동일한 응답이면 하나만 표시한다.
@@ -35,7 +41,7 @@ axiosInstance.interceptors.response.use(
 export default axiosInstance;
 
 if (typeof localStorage !== 'undefined') {
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem(JWT_TOKEN_NAME);
   if (accessToken) {
     axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   }
