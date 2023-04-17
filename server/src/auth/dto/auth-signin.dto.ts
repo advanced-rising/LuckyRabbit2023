@@ -6,7 +6,7 @@ export class AuthSignInDto {
   email: string;
 
   @IsString()
-  @MinLength(6)
-  @MaxLength(32)
+  @MinLength(4)
+  @MaxLength(8)
   password: string;
 }
