@@ -7,8 +7,11 @@ export enum PackColors {
 }
 
 export default interface PacksDto {
-  cost: number;
   color: PackColors;
-  commnet: string;
+  comment: string;
+  cost: number;
+  id: string;
+  isRead: number;
   someone: string;
+  userId: string;
 }
