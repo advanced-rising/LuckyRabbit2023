@@ -30,9 +30,7 @@ const Home = () => {
 
   const { data: me } = useUserQuery();
 
-  const { data: packs } = usePacksQuery();
 
-  console.log('packs', packs);
 
   return (
     <DashboardLayout>

@@ -2,13 +2,20 @@ import DefaultButton from 'components/button/DefaultButton';
 import DashboardLayout from 'components/layout/DashboardLayout';
 import { Box, Typo, Button } from 'components/ui/Element';
 import usePacksQuery from 'hooks/queries/usePacks';
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import PacksDto, { PackColors } from 'types/Packs';
 import { Colors } from 'utils/Constants';
-
+import {
+  BlueFannyPack,
+  GreenFannyPack,
+  OrangeFannyPack,
+  RedFannyPack,
+  YellowFannyPack,
+} from 'components/Icons/FannyPacks';
 const List = () => {
   const navigate = useNavigate();
-  const [tabs, setTabs] = useState(0);
 
   const [rowsPerPage, setRowsPerPage] = useState(9);
   const [page, setPage] = useState(0);
@@ -16,14 +23,21 @@ const List = () => {
   const _onRead = () => {
     return;
   };
-
-  const { data: packs } = usePacksQuery({
-    select: (data) => {
+  const [filter, setFilter] = useState<'all' | 'read' | 'unRead'>('read');
+  const { data: packs } = usePacksQuery(filter, {
+    select: (data: PacksDto[]) => {
+      if (filter === 'read') {
+        return data.filter((v) => v.isRead === 1);
+      }
+      if (filter === 'unRead') {
+        return data.filter((v) => v.isRead === 0);
+      }
+      if (filter === 'all') {
+        return data;
+      }
       return data;
     },
   });
-
-  console.log('packs', packs);
 
   return (
     <DashboardLayout
@@ -45,20 +59,20 @@ const List = () => {
           padding: '40px 30px 0',
         }}>
         <DefaultButton
-          onClick={() => setTabs(0)}
-          sx={{ height: 40, backgroundColor: tabs === 0 ? Colors.mainColor : Colors.disableBg }}
+          onClick={() => setFilter('all')}
+          sx={{ height: 40, backgroundColor: filter === 'all' ? Colors.mainColor : Colors.disableBg }}
           labelStyle={{ color: Colors.fontColor, fontSize: 13, fontWeight: 700 }}>
           전체 복주머니
         </DefaultButton>
         <DefaultButton
-          onClick={() => setTabs(1)}
-          sx={{ height: 40, backgroundColor: tabs === 1 ? Colors.mainColor : Colors.disableBg }}
+          onClick={() => setFilter('read')}
+          sx={{ height: 40, backgroundColor: filter === 'read' ? Colors.mainColor : Colors.disableBg }}
           labelStyle={{ color: Colors.fontColor, fontSize: 13, fontWeight: 700 }}>
           읽은 복주머니
         </DefaultButton>
         <DefaultButton
-          onClick={() => setTabs(2)}
-          sx={{ height: 40, backgroundColor: tabs === 2 ? Colors.mainColor : Colors.disableBg }}
+          onClick={() => setFilter('unRead')}
+          sx={{ height: 40, backgroundColor: filter === 'unRead' ? Colors.mainColor : Colors.disableBg }}
           labelStyle={{ color: Colors.fontColor, fontSize: 13, fontWeight: 700 }}>
           안읽은 복주머니
         </DefaultButton>
@@ -89,21 +103,21 @@ const List = () => {
                   gap: '10px',
                   flexDirection: 'column',
                 }}>
-                <Box sx={{ backgroundColor: '#000000', width: 80, height: 72 }}>aa</Box>
+                <ColorPack color={pack.color} />
                 <Box
                   sx={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Typo>홍길동</Typo>
+                  <Typo>{pack.someone}</Typo>
                 </Box>
               </Box>
             );
           })}
         </Box>
       </Box>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].length > 9 && (
+      {packs && packs.length > 9 && (
         <Box
           sx={{
             display: 'flex',
@@ -192,3 +206,22 @@ const List = () => {
 };
 
 export default List;
+
+const ColorPack = ({ color }: { color: PackColors }) => {
+  if (color === PackColors.BLUE) {
+    return <BlueFannyPack />;
+  }
+  if (color === PackColors.GREEN) {
+    return <GreenFannyPack />;
+  }
+  if (color === PackColors.RED) {
+    return <RedFannyPack />;
+  }
+  if (color === PackColors.ORANGE) {
+    return <OrangeFannyPack />;
+  }
+  if (color === PackColors.YELLOW) {
+    return <YellowFannyPack />;
+  }
+  return null;
+};

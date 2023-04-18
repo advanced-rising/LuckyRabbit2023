@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 export default function useUserQuery(options?: Omit<UseQueryOptions<MeDto, AxiosError>, 'queryKey' | 'queryFn'>) {
   const navigate = useNavigate();
-  return useQuery(['/v1/user/me'], () => userApi.me(), {
+  return useQuery(['/v1/user/me'], userApi.me, {
     onError: () => {
       navigate('/signin');
     },
-    retry: false,
+    // retry: true,
   });
 }
