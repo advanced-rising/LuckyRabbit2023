@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Provider } from 'react-redux';
+
 import AppRoutes from 'routes/AppRoutes';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Modals from './components/Modals';
-import { store } from './redux/store';
+
 import './styles/global.css';
 
 const App = () => {
@@ -21,11 +21,9 @@ const App = () => {
 
   return (
     <QueryClientProvider client={client}>
-      <Provider store={store}>
-        <Modals />
-        <AppRoutes />
-        <ReactQueryDevtools />
-      </Provider>
+      <Modals />
+      <AppRoutes />
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 };
