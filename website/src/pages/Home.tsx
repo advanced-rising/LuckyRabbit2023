@@ -30,7 +30,7 @@ const Home = () => {
 
   const { data: me } = useUserQuery();
 
-
+  console.log('me', me);
 
   return (
     <DashboardLayout>
@@ -81,7 +81,7 @@ const Home = () => {
                     backgroundColor: Colors.subTextB,
                   },
                 }}>
-                신현우
+                {me?.username}
               </Typo>
               님!
             </Typo>
@@ -103,7 +103,7 @@ const Home = () => {
                 sx={{
                   color: Colors.mainColor,
                 }}>
-                25,000
+                {me?.totalCost.toLocaleString()}
               </Typo>
               원입니다!
             </Typo>

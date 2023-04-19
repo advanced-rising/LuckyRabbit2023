@@ -23,7 +23,7 @@ const List = () => {
   const _onRead = () => {
     return;
   };
-  const [filter, setFilter] = useState<'all' | 'read' | 'unRead'>('read');
+  const [filter, setFilter] = useState<'all' | 'read' | 'unRead'>('all');
   const { data: packs } = usePacksQuery(filter, {
     select: (data: PacksDto[]) => {
       if (filter === 'read') {

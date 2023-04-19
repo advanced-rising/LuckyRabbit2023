@@ -15,29 +15,21 @@ import { useNavigate } from 'react-router-dom';
 import { selectPackAndMoney } from 'redux/slices/select';
 
 import { useAppDispatch } from 'redux/storeHooks';
+import { PackColors } from 'types/Packs';
 import { Colors } from 'utils/Constants';
 
-const enum SELECT_PACK {
-  RED_PACK = 'RED_PACK',
-  BLUE_PACK = 'BLUE_PACK',
-  GREEN_PACK = 'GREEN_PACK',
-  YELLOW_PACK = 'YELLOW_PACK',
-  ORANGE_PACK = 'ORANGE_PACK',
-}
-
-const enum SELECT_MONEY {
-  BLUE_MONEY = 'BLUE_MONEY',
-  RED_MONEY = 'RED_MONEY',
-  GREEN_MONEY = 'GREEN_MONEY',
-  YELLOW_MONEY = 'YELLOW_MONEY',
-  NOT_SELECT = 'NOT_SELECT',
-}
-
 const Select = () => {
-  const [selectPack, setSelectPack] = useState<SELECT_PACK>();
-  const [selectMoney, setSelectMoney] = useState<SELECT_MONEY>();
+  const [selectPack, setSelectPack] = useState<PackColors>();
+  const [selectMoney, setSelectMoney] = useState<number>();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const save = () => {
+    console.log(selectPack);
+    console.log(selectMoney);
+    dispatch(selectPackAndMoney({ selectPack, selectMoney }));
+    navigate('/send');
+  };
 
   useEffect(() => {
     dispatch(selectPackAndMoney({ selectPack, selectMoney }));
@@ -86,39 +78,39 @@ const Select = () => {
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '14px' }}>
                 <PackIconButton
                   onClick={() => {
-                    setSelectPack(SELECT_PACK['RED_PACK']);
+                    setSelectPack(PackColors['RED']);
                   }}>
-                  {selectPack === SELECT_PACK['RED_PACK'] && <Check />}
+                  {selectPack === PackColors['RED'] && <Check />}
                   <RedFannyPack />
                 </PackIconButton>
                 <PackIconButton
                   onClick={() => {
-                    setSelectPack(SELECT_PACK['BLUE_PACK']);
+                    setSelectPack(PackColors['BLUE']);
                   }}>
-                  {selectPack === SELECT_PACK['BLUE_PACK'] && <Check />}
+                  {selectPack === PackColors['BLUE'] && <Check />}
                   <BlueFannyPack />
                 </PackIconButton>
                 <PackIconButton
                   onClick={() => {
-                    setSelectPack(SELECT_PACK['GREEN_PACK']);
+                    setSelectPack(PackColors['GREEN']);
                   }}>
-                  {selectPack === SELECT_PACK['GREEN_PACK'] && <Check />}
+                  {selectPack === PackColors['GREEN'] && <Check />}
                   <GreenFannyPack />
                 </PackIconButton>
               </Box>
               <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '14px' }}>
                 <PackIconButton
                   onClick={() => {
-                    setSelectPack(SELECT_PACK['YELLOW_PACK']);
+                    setSelectPack(PackColors['YELLOW']);
                   }}>
-                  {selectPack === SELECT_PACK['YELLOW_PACK'] && <Check />}
+                  {selectPack === PackColors['YELLOW'] && <Check />}
                   <YellowFannyPack />
                 </PackIconButton>
                 <PackIconButton
                   onClick={() => {
-                    setSelectPack(SELECT_PACK['ORANGE_PACK']);
+                    setSelectPack(PackColors['ORANGE']);
                   }}>
-                  {selectPack === SELECT_PACK['ORANGE_PACK'] && <Check />}
+                  {selectPack === PackColors['ORANGE'] && <Check />}
                   <OrangeFannyPack />
                 </PackIconButton>
               </Box>
@@ -145,25 +137,25 @@ const Select = () => {
               <MoneyIconButton
                 sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}
                 onClick={() => {
-                  setSelectMoney(SELECT_MONEY['BLUE_MONEY']);
+                  setSelectMoney(1000);
                 }}>
-                {selectMoney === SELECT_MONEY['BLUE_MONEY'] && <Check />}
+                {selectMoney === 1000 && <Check />}
                 <Money1000 />
               </MoneyIconButton>
               <MoneyIconButton
                 sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}
                 onClick={() => {
-                  setSelectMoney(SELECT_MONEY['RED_MONEY']);
+                  setSelectMoney(5000);
                 }}>
-                {selectMoney === SELECT_MONEY['RED_MONEY'] && <Check />}
+                {selectMoney === 5000 && <Check />}
                 <Money5000 />
               </MoneyIconButton>
               <MoneyIconButton
                 sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}
                 onClick={() => {
-                  setSelectMoney(SELECT_MONEY['GREEN_MONEY']);
+                  setSelectMoney(10000);
                 }}>
-                {selectMoney === SELECT_MONEY['GREEN_MONEY'] && <Check />}
+                {selectMoney === 10000 && <Check />}
                 <Money10000 />
               </MoneyIconButton>
             </Box>
@@ -178,23 +170,23 @@ const Select = () => {
               <MoneyIconButton
                 sx={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25))' }}
                 onClick={() => {
-                  setSelectMoney(SELECT_MONEY['YELLOW_MONEY']);
+                  setSelectMoney(50000);
                 }}>
-                {selectMoney === SELECT_MONEY['YELLOW_MONEY'] && <Check />}
+                {selectMoney === 50000 && <Check />}
                 <Money50000 />
               </MoneyIconButton>
               <MoneyIconButton
                 onClick={() => {
-                  setSelectMoney(SELECT_MONEY['NOT_SELECT']);
+                  setSelectMoney(0);
                 }}>
-                {selectMoney === SELECT_MONEY['NOT_SELECT'] && <Check />}
+                {selectMoney === 0 && <Check />}
                 <MoneyNot />
               </MoneyIconButton>
             </Box>
           </Box>
         </Box>
         <Box sx={{ paddingTop: '45px' }} component={'article'}>
-          <DefaultButton onClick={() => navigate('/send')}>다음</DefaultButton>
+          <DefaultButton onClick={() => save()}>다음</DefaultButton>
         </Box>
       </Box>
     </DashboardLayout>

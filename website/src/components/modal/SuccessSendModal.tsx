@@ -14,7 +14,16 @@ const fadeIn = keyframes`
   }
 `;
 
-const SuccessSendModal = ({ modalOpen, onClose }: { modalOpen: boolean; onClose: () => void }) => {
+const SuccessSendModal = ({
+  modalOpen,
+  onClose,
+  props,
+}: {
+  modalOpen: boolean;
+  onClose: () => void;
+  props: { onClick: () => void };
+}) => {
+  const { onClick } = props;
   return (
     <Box onClick={() => onClose()} sx={{ animation: modalOpen ? `${fadeIn} 0.5s ease-in-out` : '' }}>
       <Box
@@ -67,7 +76,13 @@ const SuccessSendModal = ({ modalOpen, onClose }: { modalOpen: boolean; onClose:
             </Typo>
           </Box>
           <Box sx={{ position: 'absolute', bottom: 0 }}>
-            <DefaultButton onClick={() => onClose()}>닫기</DefaultButton>
+            <DefaultButton
+              onClick={() => {
+                onClick();
+                onClose();
+              }}>
+              닫기
+            </DefaultButton>
           </Box>
         </Box>
       </Box>

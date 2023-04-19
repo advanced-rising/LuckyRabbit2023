@@ -1,14 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { PackColors } from 'types/Packs';
 import { RootState } from '../store';
 
 export interface SelectState {
-  pack: string;
-  money: string;
+  pack: PackColors | undefined;
+  money: number | undefined;
 }
 
 const initialState: SelectState = {
-  pack: '',
-  money: '',
+  pack: undefined,
+  money: undefined,
 };
 
 export const selectSlice = createSlice({
@@ -16,8 +17,9 @@ export const selectSlice = createSlice({
   initialState,
   reducers: {
     selectPackAndMoney: (state, action) => {
-      state.money = action.payload.moeny;
-      state.pack = action.payload.pack;
+      console.log('action', action.payload);
+      state.money = action.payload.selectMoney;
+      state.pack = action.payload.selectPack;
     },
   },
 });
