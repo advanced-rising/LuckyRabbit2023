@@ -32,6 +32,5 @@ export class Pack {
   userId: string;
 
   @ManyToOne(() => User, (user) => user.packs)
-  @JoinColumn({ name: 'userId' })
   user: User;
 }

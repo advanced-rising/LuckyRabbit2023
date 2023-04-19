@@ -15,6 +15,9 @@ export class User {
   @Column()
   password: string;
 
-  @OneToMany(() => Pack, (pack) => pack.userId)
+  @OneToMany(() => Pack, (pack) => pack.user)
   packs: Pack[];
+
+  @Column({ nullable: true })
+  totalCost: number;
 }
