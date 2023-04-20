@@ -25,7 +25,12 @@ const SuccessSendModal = ({
 }) => {
   const { onClick } = props;
   return (
-    <Box onClick={() => onClose()} sx={{ animation: modalOpen ? `${fadeIn} 0.5s ease-in-out` : '' }}>
+    <Box
+      onClick={() => {
+        onClick();
+        onClose();
+      }}
+      sx={{ animation: modalOpen ? `${fadeIn} 0.5s ease-in-out` : '' }}>
       <Box
         sx={{
           position: 'fixed',

@@ -39,6 +39,33 @@ const List = () => {
     },
   });
 
+  const totalPage = packs && Math.ceil(packs?.length / rowsPerPage);
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    if (totalPage)
+      for (let i = 1; i <= totalPage; i++) {
+        pageNumbers.push(
+          <Button
+            key={i}
+            onClick={() => {
+              setPage(i - 1);
+            }}
+            sx={{
+              width: 50,
+              height: 50,
+              backgroundColor: page === i - 1 ? Colors.mainColor : Colors.bgColor,
+              border: 'none',
+              borderRadius: '9999px',
+              fontSize: 20,
+            }}>
+            {i}
+          </Button>,
+        );
+      }
+    return pageNumbers;
+  };
+
   return (
     <DashboardLayout
       back={() => navigate('/')}
@@ -83,6 +110,7 @@ const List = () => {
           component='ul'
           sx={{
             width: '100%',
+            height: 390,
             display: 'flex',
             justifyContent: 'start',
             alignItems: 'start',
@@ -123,11 +151,18 @@ const List = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            width: '100%',
+            width: '330px',
             gap: '20px',
             paddingTop: '40px',
           }}>
           <Button
+            onClick={() => {
+              if (page === 0) {
+                return;
+              } else {
+                setPage(page - 1);
+              }
+            }}
             sx={{
               width: 50,
               height: 50,
@@ -151,31 +186,25 @@ const List = () => {
               prev
             </Typo>
           </Button>
-          <Button
+          <Box
             sx={{
-              width: 50,
-              height: 50,
-              backgroundColor: Colors.bgColor,
-              border: 'none',
-              borderRadius: '9999px',
-            }}></Button>
+              width: '190px',
+              flex: 3,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '20px',
+            }}>
+            {renderPageNumbers()}
+          </Box>
           <Button
-            sx={{
-              width: 50,
-              height: 50,
-              backgroundColor: Colors.bgColor,
-              border: 'none',
-              borderRadius: '9999px',
-            }}></Button>
-          <Button
-            sx={{
-              width: 50,
-              height: 50,
-              backgroundColor: Colors.bgColor,
-              border: 'none',
-              borderRadius: '9999px',
-            }}></Button>
-          <Button
+            onClick={() => {
+              if (page === Math.ceil(packs.length / rowsPerPage) - 1) {
+                return;
+              } else {
+                setPage(page + 1);
+              }
+            }}
             sx={{
               width: 50,
               height: 50,

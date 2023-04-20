@@ -32,7 +32,7 @@ const Send = () => {
     console.log('formData', formData);
     console.log('select', select);
     if (select.money && select.pack) {
-      packApi.createPack({
+      await packApi.createPack({
         cost: select.money,
         color: select.pack,
         someone: formData.someone,
