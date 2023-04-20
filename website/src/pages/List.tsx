@@ -129,7 +129,14 @@ const List = () => {
         </DefaultButton>
       </Box>
       <Box
-        sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '40px 30px 0' }}>
+        sx={{
+          position: 'relative',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '40px 30px 0',
+        }}>
         <Box
           component='ul'
           sx={{
@@ -171,6 +178,8 @@ const List = () => {
       {packs && packs.length > 9 && (
         <Box
           sx={{
+            position: 'absolute',
+            top: '650px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
