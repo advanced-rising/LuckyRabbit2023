@@ -12,7 +12,13 @@ const createPack = async (params: { cost: number; color: PackColors; comment: st
   return data;
 };
 
+const read = async (id: string) => {
+  const { data } = await axiosInstance.put(`/v1/packs/${id}/read`);
+  return data;
+};
+
 export default {
   getPacks,
   createPack,
+  read,
 };

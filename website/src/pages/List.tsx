@@ -14,28 +14,52 @@ import {
   RedFannyPack,
   YellowFannyPack,
 } from 'components/Icons/FannyPacks';
+import useModals from 'hooks/shared/useModals';
+import RecivePackModal from 'components/modal/RecivePackModal';
+import packApi from 'apis/packApi';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import useUserQuery from 'hooks/queries/useUserQuery';
+import { orderBy } from 'lodash';
 const List = () => {
   const navigate = useNavigate();
 
   const [rowsPerPage, setRowsPerPage] = useState(9);
   const [page, setPage] = useState(0);
 
-  const _onRead = () => {
-    return;
+  const { data: me } = useUserQuery();
+  const { openModal } = useModals();
+  const queryClient = useQueryClient();
+  const { mutate: read } = useMutation((id: string) => packApi.read(id), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['/v1/packs', me, { filter }]);
+    },
+  });
+
+  const _onRead = ({ id, username, cost }: { id: string; username: string; cost: number }) => {
+    openModal(RecivePackModal, {
+      props: {
+        onClick: () => {
+          read(id);
+        },
+        username,
+        cost,
+      },
+    });
   };
   const [filter, setFilter] = useState<'all' | 'read' | 'unRead'>('all');
   const { data: packs } = usePacksQuery(filter, {
     select: (data: PacksDto[]) => {
+      const order = orderBy(data, ['createdAt'], ['desc']);
       if (filter === 'read') {
-        return data.filter((v) => v.isRead === 1);
+        return order.filter((v) => v.isRead === 1);
       }
       if (filter === 'unRead') {
-        return data.filter((v) => v.isRead === 0);
+        return order.filter((v) => v.isRead === 0);
       }
       if (filter === 'all') {
-        return data;
+        return order;
       }
-      return data;
+      return order;
     },
   });
 
@@ -110,11 +134,9 @@ const List = () => {
           component='ul'
           sx={{
             width: '100%',
-            height: 390,
-            display: 'flex',
-            justifyContent: 'start',
-            alignItems: 'start',
-            flexWrap: 'wrap',
+
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
             gap: '45px',
           }}>
           {packs?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((pack, index) => {
@@ -122,9 +144,10 @@ const List = () => {
               <Box
                 key={index}
                 component='li'
-                onClick={() => _onRead()}
+                onClick={() => _onRead({ id: pack.id, username: pack.from, cost: pack.cost })}
                 sx={{
-                  width: 'auto',
+                  width: '80px',
+                  height: '100px',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
