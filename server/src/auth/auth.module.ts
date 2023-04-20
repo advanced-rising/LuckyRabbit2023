@@ -17,7 +17,7 @@ import { JWT_SECRET } from 'src/utils/constants';
       useFactory: async () => ({
         secret: JWT_SECRET,
         signOptions: {
-          expiresIn: 3600,
+          expiresIn: 604800,
         },
       }),
     }),
