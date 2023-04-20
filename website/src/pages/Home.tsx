@@ -22,7 +22,9 @@ const Home = () => {
     try {
       await copy(window?.location.href);
 
-      openModal(SuccessCopyModal, { props: {} });
+      openModal(SuccessCopyModal, {
+        props: {},
+      });
     } catch (error) {
       console.log(error);
     }

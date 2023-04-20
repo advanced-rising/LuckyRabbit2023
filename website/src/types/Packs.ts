@@ -14,4 +14,5 @@ export default interface PacksDto {
   isRead: number;
   someone: string;
   userId: string;
+  from: string;
 }

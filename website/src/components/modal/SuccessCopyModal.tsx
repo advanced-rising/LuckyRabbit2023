@@ -16,7 +16,7 @@ const fadeIn = keyframes`
 
 const SuccessCopyModal = ({ modalOpen, onClose }: { modalOpen: boolean; onClose: () => void }) => {
   return (
-    <Box onClick={() => onClose()} sx={{ animation: modalOpen ? `${fadeIn} 0.5s ease-in-out` : '' }}>
+    <Box onClick={() => onClose()}>
       <Box
         sx={{
           position: 'fixed',
