@@ -40,6 +40,7 @@ export class PackService {
       someone,
       comment,
       isRead: 0,
+      from: user.username,
     });
 
     await this.packRepository.save(pack);

@@ -1,6 +1,7 @@
 import { User } from 'src/auth/user.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -31,6 +32,15 @@ export class Pack {
   @Column()
   userId: string;
 
+  @Column({ nullable: true })
+  from: string;
+
   @ManyToOne(() => User, (user) => user.packs)
   user: User;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @CreateDateColumn()
+  updatedAt: Date;
 }
